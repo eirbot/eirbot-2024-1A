@@ -1,5 +1,8 @@
 #include "motor_commands.h"
 
+#define d1 0.05
+#define r 0.05
+
 /**
  * Assuming the left and right wheels rotate with opposite angular speeds,
  *  sets their rotation to rotates the specified angle.
@@ -25,7 +28,7 @@ void set_wheels_rotation_from_global_rotation(float theta_rad, float *wheel_left
  * @param left_wheel_rotation Pointer to the left wheel rotation angle, in radian
  * @param right_wheel_rotation Pointer to the right wheel rotation angle, in radian
  */
-void set_wheels_rotation_from_global_rotation(float theta_rad, float *wheel_left_rotation, float *wheel_right_rotation)
+void set_wheels_rotation_from_from_distance(float distance, float *left_wheel_rotation, float *right_wheel_rotation)
 {
     if (distance) {
         *left_wheel_rotation = distance/r;

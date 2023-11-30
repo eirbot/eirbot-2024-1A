@@ -1,4 +1,4 @@
-#include "move_commands.h"
+#include "robot_commands.h"
 #include "motor_commands.h"
 
 void move_forward(float distance) {
@@ -15,6 +15,6 @@ void move_backwards(float distance) {
 void rotate(float theta_rad) {
     float left_wheel_rotation;
     float right_wheel_rotation;
-    set_wheels_rotation_from_global_rotation(global_rotation, &left_wheel_rotation, &right_wheel_rotation);
+    set_wheels_rotation_from_global_rotation(theta_rad, &left_wheel_rotation, &right_wheel_rotation);
     accomplish_steps(&left_wheel_rotation, &right_wheel_rotation);
 }
