@@ -1,8 +1,8 @@
 # Jetbrains IDEs config
 .idea/
 # obj files
-.o
+*.o
 
 # pre-compiled headers
-.gch
+*.gch
 
