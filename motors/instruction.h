@@ -5,7 +5,7 @@
  * Instruction types:
  * - 'f': rectilign forward movement (distance in cm)
  * - 'r': static rotation (angle in rad)
- * - 'w': wait (time in seconds)
+ * - 'w': wait (time in milliseconds)
 */
 struct instruction {
     char instruction_type;

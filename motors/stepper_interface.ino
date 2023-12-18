@@ -15,19 +15,22 @@ void setMotorsSteps(struct instruction instrct)
     {
     case 'f':
         set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+        def_avancerD(right_wheel_data.step_number, right_wheel_data.direction);
+        def_avancerG(left_wheel_data.step_number, left_wheel_data.direction);
         break;
     case 'r':
         set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
+        def_avancerD(right_wheel_data.step_number, right_wheel_data.direction);
+        def_avancerG(left_wheel_data.step_number, left_wheel_data.direction);
         break;
     case 'w':
-        //TODO
+        unsigned int milliseconds = (instrct.value>=0)?instrct.value:-instrct.value;
+        schedule_standby(milliseconds);
         break;
     default:
         break;
     }
-    char dir = (instrct.value >= 0);
-    def_avancerD(right_wheel_data.step_number, right_wheel_data.direction);
-    def_avancerG(left_wheel_data.step_number, left_wheel_data.direction);
+    
 }
 
 void executeOneMotorStep()

@@ -1,3 +1,7 @@
+#include "steppers.h"
+
+const unsigned int DELAY_BY_STEP_WHILE_STOP = 2000;
+
 // Define pin connections & motor's steps per revolution
 // const int pas_r = 500;
 const int vit_min = 2500;
@@ -48,13 +52,21 @@ char motor_free()
 
 void motor_step()
 {
-    if (mot_libreD == 1 && mot_libreG == 1)
-    {
-        delay(2000);
-    }
+    if (mot_libreD && mot_libreG)
+        delay(DELAY_BY_STEP_WHILE_STOP);
     ver_avancerG();
     ver_avancerD();
     // avancerMotD1(10000, 1);
+}
+
+void schedule_standby(unsigned int delta_t)
+{
+    def_avancerD(0, 0);
+    def_avancerG(0, 0);
+    r_pas_restantsD = delta_t/DELAY_BY_STEP_WHILE_STOP;
+    r_pas_restantsG = r_pas_restantsD;
+    mot_libreD = 1;
+    mot_libreG = 1;
 }
 
 void def_avancerD(unsigned int pas, char dir)
@@ -89,10 +101,12 @@ void def_avancerG(unsigned int pas, char dir)
 
 void ver_avancerD()
 {
-    if (r_pas_restantsD <= 0)
-        mot_libreD = 1;
-    else
-    {
+    if (mot_libreD) {
+        if (r_pas_restantsD <= 0)
+            mot_libreD = 0;
+        else
+            r_pas_restantsD--;
+    } else {
         if (micros() - r_timeD >= r_delaiD)
         {
             r_timeD = micros();
@@ -122,10 +136,12 @@ void ver_avancerD()
 
 void ver_avancerG()
 {
-    if (r_pas_restantsG <= 0)
-        mot_libreG = 1;
-    else
-    {
+    if (mot_libreG) {
+        if (r_pas_restantsG <= 0)
+            mot_libreG = 0;
+        else
+            r_pas_restantsG--;
+    } else {
         if (micros() - r_timeG >= r_delaiG)
         {
             r_timeG = micros();
