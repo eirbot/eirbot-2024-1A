@@ -32,7 +32,7 @@ int r_pas_restantsG = 0;
 
 unsigned long a = 0;
 
-void setup()
+void board_setup()
 {
     // Declare pins as Outputs
     pinMode(stepPinD, OUTPUT);
@@ -40,14 +40,17 @@ void setup()
     pinMode(stepPinG, OUTPUT);
     pinMode(dirPinG, OUTPUT);
 }
-void loop()
+
+char motor_free()
 {
-    if (mot_libreG == 1)
+    return (r_pas_restantsD <= 0 && r_pas_restantsG <= 0);
+}
+
+void motor_step()
+{
+    if (mot_libreD == 1 && mot_libreG == 1)
     {
         delay(2000);
-        def_avancerG(3 * tour, a);
-        def_avancerD(3 * tour, a);
-        a = (a == 0);
     }
     ver_avancerG();
     ver_avancerD();

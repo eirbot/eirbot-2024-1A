@@ -2,17 +2,17 @@
 Here is an algorithm to enable the execution of a versatile high-level algorithm of strategy from elementary calls of motor rotation steps. 
 
 ## Electronic interactions
-The rotation steps are done at each electronic card's loop from some global status variables such as `remaining_motor_steps_*` (`r_pas*` variables in [the main script](../motors/code_arduino_uno_steppers_fonctionnel_051220023.ino)) which indicates whether each wheel still has to turn. We model this execution by the call of the `executeOneMotorStep` function. A step execution obviously decrements the `remaining_motor_steps_*` variable for each rotating wheel.
+The rotation steps are done at each electronic board's loop from some global status variables such as `remaining_motor_steps_*` (`r_pas*` variables in [the main script](../motors/code_arduino_uno_steppers_fonctionnel_051220023.ino)) which indicates whether each wheel still has to turn. We model this execution by the call of the `executeOneMotorStep` function. A step execution obviously decrements the `remaining_motor_steps_*` variable for each rotating wheel.
 
 
 ## Intermediate-level instruction
 Repeating several rotation steps on the correct wheels, the robot is able to rotate by any angle and to move forward/backward by any distance. In the following part of this documentation, these two kinds of task are being called *intermediate-level instructions* (*ILIs*).
 
-Just one of them at a time can be carried out by the electronic card's loop. To execute a range of ILIs, a queue of pending ILIs is therefore allocated.  
+Just one of them at a time can be carried out by the electronic board's loop. To execute a range of ILIs, a queue of pending ILIs is therefore allocated.  
 The execution of the first prioritary ILI is done by calling once the `scheduleNextInstruction` function, which pop it from the head of the queue and read it to relevantly change the values of the `remaining_motor_steps_*` status variables. ![instruction scheduling schema](./scheduleNextILI.svg)
 The next ILI is scheduled when all the required steps have been run to achieve the current ILI. In that case, the function `taskDoneWithSuccess` returns `true()` and `scheduleNextInstruction` is called again.
 
-With these features, the robot is already able to sequentially achieve a range of ILIs with the following code in the electronic card's `loop` function: 
+With these features, the robot is already able to sequentially achieve a range of ILIs with the following code in the electronic board's `loop` function: 
 
 ```
 function loop()
@@ -39,7 +39,7 @@ It may happen that the current range of pending ILIs is not relevant anymore giv
 
 ### Interrupting an ILI on outside signal reception
 
-The electronic card can receive an external stop signal (e.g. an emergency stop from an external device). Assuming the information is stocked in an inbox which can be processed in the thread of the `loop` function, then we can add an outside signal processing task in the loop.
+The electronic board can receive an external stop signal (e.g. an emergency stop from an external device). Assuming the information is stocked in an inbox which can be processed in the thread of the `loop` function, then we can add an outside signal processing task in the loop.
 ```
 function loop()
 begin
@@ -60,7 +60,7 @@ end
 >    endif
 >    if taskDoneWithSuccess() do
 >        scheduleNextInstruction();
->        t ← t + 1; 
+>    t ← t + 1; 
 >    executeOneMotorStep();
 >end
 >```
