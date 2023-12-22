@@ -1,3 +1,6 @@
+#ifndef __CONVERSIONS_H__
+#define __CONVERSIONS_H__
+
 struct wheel_step_data {
     unsigned int step_number;
     char direction; // 1 := trigonometric direction
@@ -20,3 +23,5 @@ void set_wheels_rotation_from_global_rotation(float theta_rad, struct wheel_step
  * @param right_wheel_step_data Pointer to the right wheel step number var
  */
 void set_wheels_rotation_from_distance(float distance, struct wheel_step_data *left_wheel_step_data, struct wheel_step_data *right_wheel_step_data);
+
+#endif

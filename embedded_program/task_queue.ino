@@ -1,7 +1,7 @@
 #include "task_queue.h"
 #include "instruction.h"
 
-struct instruction queue[MAX_QUEUE_SIZE];
+struct instruction queue[MAX_QUEUE_SIZE]; // TODO : dynamic size
 unsigned int tail_cursor = MAX_QUEUE_SIZE-1;
 unsigned int head_cursor = MAX_QUEUE_SIZE-1;
 char queue_empty = 1;
