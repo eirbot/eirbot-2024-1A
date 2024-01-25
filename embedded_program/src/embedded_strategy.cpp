@@ -4,7 +4,7 @@
 void inspectEnvironmentAndComputeNewStrategy()
 {
     //TODO: enqueue a cyclic instruction
-    enqueueInstruction({'f', 5});
-    enqueueInstruction({'f', -5});
+    enqueueInstruction({'f', 100});
+    enqueueInstruction({'f', -100});
     // enqueueInstruction({'w', 7000});
 };

@@ -119,5 +119,6 @@ void reculer(unsigned int pas){
 
 char motor_free(){
     motors[0]->wait_while_active();
+    motors[1]->wait_while_active();
     return 1;
 }
