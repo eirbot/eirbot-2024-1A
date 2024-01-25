@@ -1,5 +1,6 @@
 #include "SPI.h"
 #include "XNucleoIHM02A1.h"
+#include "L6470.h"
 
 /* Definitions ---------------------------------------------------------------*/
 
@@ -114,4 +115,9 @@ void reculer(unsigned int pas){
     motors[1]->prepare_move(StepperMotor::BWD, pas*128);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+char motor_free(){
+    motors[0]->wait_while_active();
+    return 1;
 }

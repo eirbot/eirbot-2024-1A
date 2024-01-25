@@ -40,7 +40,7 @@ void setMotorsSteps(struct instruction instrct)
 
 void executeOneMotorStep()
 {
-    motor_step();
+    // motor_step();
 }
 
 char isStepperFree()
@@ -50,6 +50,6 @@ char isStepperFree()
 
 void abortRunningTask()
 {
-    def_avancerD(0,0);
-    def_avancerG(0,0);
+    // def_avancerD(0,0);
+    // def_avancerG(0,0);
 }
