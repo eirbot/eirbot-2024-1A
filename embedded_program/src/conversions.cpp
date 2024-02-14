@@ -2,7 +2,7 @@
 
 #define AXLE_TREE_LENGTH 13.1 // centimetres
 #define WHEEL_RADIUS 3.65 // centimetres
-#define STEPS_BY_RAD 31.83098861 // steps/rad
+#define STEPS_BY_RAD 4074.36654208 // steps/rad
 
 
 void set_wheels_rotation_from_global_rotation(float theta_rad, struct wheel_step_data *left_wheel_step_data, struct wheel_step_data *right_wheel_step_data)
