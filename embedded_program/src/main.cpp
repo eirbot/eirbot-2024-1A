@@ -33,10 +33,12 @@ void setup()
 {
     initiateBoardVars();
     t = 0;
+    Serial.begin(115200);
 }
 
 void loop()
 {
+    // Serial.println("loop");
     if (t++ == DELTA_T) {
         t = 0;
         processOutsideSignals();

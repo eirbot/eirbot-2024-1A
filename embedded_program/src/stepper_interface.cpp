@@ -15,19 +15,29 @@ void setMotorsSteps(struct instruction instrct)
         case 'f':
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
-            if (instrct.value > 0)
-                avancer(right_wheel_data.step_number);
-            else 
-                reculer(right_wheel_data.step_number);
+            avancer(right_wheel_data.step_number);
+        }
+            break;
+        case 'b':
+        {
+            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+            reculer(right_wheel_data.step_number);
         }
             break;
         case 'r':
         {
             set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
+            tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
         }
             break;
-        case 'w':
+            case 'l':
         {
+            set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
+            tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+        }
+            break;
+        {
+        case 'w':
             unsigned int milliseconds = (instrct.value>=0)?instrct.value:-instrct.value;
         }
             break;
@@ -50,6 +60,5 @@ char isStepperFree()
 
 void abortRunningTask()
 {
-    // def_avancerD(0,0);
-    // def_avancerG(0,0);
+    hardStop();
 }
