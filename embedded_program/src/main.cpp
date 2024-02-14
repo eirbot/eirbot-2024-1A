@@ -11,10 +11,15 @@ const unsigned int MAX_SEQUENCE_LENGTH = 200;
 void processOutsideSignals()
 {
     if (gotEmergencyStopSignal()) {
+        Serial.println("oui");
         abortRunningTask();
         struct instruction wait = {'w', 2.0}; // Wait 2 seconds
         clearQueue();
         enqueueInstruction(wait);
+        // char w=0;
+        // while(!w){
+        //     Serial.println(digitalRead(D7));
+        // }
     } else
         processExternalInstructions();
 }
@@ -34,11 +39,11 @@ void setup()
     initiateBoardVars();
     t = 0;
     Serial.begin(115200);
+    // pinMode(A0, INPUT);
 }
 
 void loop()
 {
-    // Serial.println("loop");
     if (t++ == DELTA_T) {
         t = 0;
         processOutsideSignals();

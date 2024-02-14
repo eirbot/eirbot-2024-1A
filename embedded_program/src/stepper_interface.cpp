@@ -1,9 +1,12 @@
 #include "stepper_interface.h"
 #include "steppers.h"
 #include "conversions.h"
+#include "Arduino.h"
 
 void initiateBoardVars()
 {
+    pinMode(EMERGENCY_PIN, INPUT);
+    digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
 }
 
@@ -38,7 +41,7 @@ void setMotorsSteps(struct instruction instrct)
             break;
         {
         case 'w':
-            unsigned int milliseconds = (instrct.value>=0)?instrct.value:-instrct.value;
+            delay(instrct.value * 1000);
         }
             break;
         
