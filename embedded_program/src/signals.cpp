@@ -2,7 +2,7 @@
 #include "sensors.h"
 #include "Arduino.h"
 #include "printing.h"
-// #define EMERGENCY_PIN D7
+#include "pins.h"
 
 char gotEmergencyStopSignal()
 {
@@ -13,8 +13,8 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    int distance = readUltrasonic();
-    printing(distance);
+    // int distance = readUltrasonic();
+    // printing(distance);
 }
 
 void processExternalInstructions(){};

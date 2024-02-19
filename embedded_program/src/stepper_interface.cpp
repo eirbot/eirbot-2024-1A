@@ -2,6 +2,7 @@
 #include "steppers.h"
 #include "conversions.h"
 #include "Arduino.h"
+#include "pins.h"
 
 #define DELAY_PER_STEP 200 // 0.2s
 
@@ -10,8 +11,10 @@ unsigned int remaining_time; // multiple of 0.2s
 void initiateBoardVars()
 {
     remaining_time = 0;
-    pinMode(EMERGENCY_PIN, INPUT);
-    digitalWrite(EMERGENCY_PIN, LOW);
+    pinMode(trigPin, OUTPUT);
+    pinMode(echoPin, INPUT);
+    // pinMode(EMERGENCY_PIN, INPUT);
+    // digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
 }
 
@@ -59,9 +62,10 @@ void setMotorsSteps(struct instruction instrct)
 void executeOneMotorStep()
 {
     // motor_step();
-    if (remaining_time)
+    if (remaining_time){
         remaining_time--;
-    delay(DELAY_PER_STEP);
+        delay(DELAY_PER_STEP);
+    }
 }
 
 char isStepperFree()

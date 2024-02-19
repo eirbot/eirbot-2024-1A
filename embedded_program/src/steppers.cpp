@@ -91,7 +91,6 @@ void board_setup()
 
     /* Initializing SPI bus. */
     dev_spi = new SPIClass(D11, D12, D3);
-    SerialPort.begin(115200);
 
     /* Initializing Motor Control Expansion Board. */
     x_nucleo_ihm02a1 = new XNucleoIHM02A1(&L6470_init[0], &L6470_init[1], A4, A5, D4, A2, dev_spi);
