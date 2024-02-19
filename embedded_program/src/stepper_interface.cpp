@@ -3,7 +3,7 @@
 #include "conversions.h"
 #include "Arduino.h"
 
-#define DELAY_BY_STEP 200 // 0.2s
+#define DELAY_PER_STEP 200 // 0.2s
 
 unsigned int remaining_time; // multiple of 0.2s 
 
@@ -46,7 +46,7 @@ void setMotorsSteps(struct instruction instrct)
             break;
         {
         case 'w':
-            remaining_time = instrct.value * (1000/200);
+            remaining_time = instrct.value * (1000/DELAY_PER_STEP);
         }
             break;
         
@@ -61,7 +61,7 @@ void executeOneMotorStep()
     // motor_step();
     if (remaining_time)
         remaining_time--;
-    delay(DELAY_BY_STEP);
+    delay(DELAY_PER_STEP);
 }
 
 char isStepperFree()
