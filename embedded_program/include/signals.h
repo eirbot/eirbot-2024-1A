@@ -15,6 +15,10 @@ char gotEmergencyStopSignal();
 */
 void processExternalInstructions();
 
+/**
+ * Checks if the embedded sensor measure environmental issue and change the queue
+ * if so.
+*/
 void processExternalSignals();
 
 #endif

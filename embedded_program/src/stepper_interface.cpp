@@ -3,8 +3,13 @@
 #include "conversions.h"
 #include "Arduino.h"
 
+#define DELAY_BY_STEP 200 // 0.2s
+
+unsigned int remaining_time; // multiple of 0.2s 
+
 void initiateBoardVars()
 {
+    remaining_time = 0;
     pinMode(EMERGENCY_PIN, INPUT);
     digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
@@ -41,7 +46,7 @@ void setMotorsSteps(struct instruction instrct)
             break;
         {
         case 'w':
-            delay(instrct.value * 1000);
+            remaining_time = instrct.value * (1000/200);
         }
             break;
         
@@ -54,11 +59,17 @@ void setMotorsSteps(struct instruction instrct)
 void executeOneMotorStep()
 {
     // motor_step();
+    if (remaining_time)
+        remaining_time--;
+    delay(DELAY_BY_STEP);
 }
 
 char isStepperFree()
 {
-    return motor_free();
+    if (!remaining_time)
+        return motor_free();
+    else
+        return 0;
 }
 
 void abortRunningTask()
