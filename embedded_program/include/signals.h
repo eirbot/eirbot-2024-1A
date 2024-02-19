@@ -15,4 +15,6 @@ char gotEmergencyStopSignal();
 */
 void processExternalInstructions();
 
+void processExternalSignals();
+
 #endif

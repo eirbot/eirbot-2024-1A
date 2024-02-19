@@ -31,11 +31,11 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
     /* First Motor. */
     {
         9.0,                           /* Motor supply voltage in V. */
-        400,                           /* Min number of steps per revolution for the motor. */
+        200,                           /* Min number of steps per revolution for the motor. */
         1.7,                           /* Max motor phase voltage in A. */
         3.06,                          /* Max motor phase voltage in V. */
         300.0,                         /* Motor initial speed [step/s]. */
-        500.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        700.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
         500.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
         992.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
@@ -59,11 +59,11 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
     /* Second Motor. */
     {
         9.0,                           /* Motor supply voltage in V. */
-        400,                           /* Min number of steps per revolution for the motor. */
+        200,                           /* Min number of steps per revolution for the motor. */
         1.7,                           /* Max motor phase voltage in A. */
         3.06,                          /* Max motor phase voltage in V. */
         300.0,                         /* Motor initial speed [step/s]. */
-        500.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        700.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
         500.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
         992.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */

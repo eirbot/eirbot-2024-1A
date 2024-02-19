@@ -21,6 +21,7 @@ void processOutsideSignals()
         //     Serial.println(digitalRead(D7));
         // }
     } else
+        processExternalSignals();
         processExternalInstructions();
 }
 
@@ -38,7 +39,8 @@ void setup()
 {
     initiateBoardVars();
     t = 0;
-    Serial.begin(115200);
+    Serial.begin(9600);
+    // Serial1.begin(9600);
     // pinMode(A0, INPUT);
 }
 

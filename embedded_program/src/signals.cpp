@@ -1,15 +1,20 @@
 #include "signals.h"
+#include "sensors.h"
 #include "Arduino.h"
-#define EMERGENCY_PIN D7
+#include "printing.h"
+// #define EMERGENCY_PIN D7
 
 char gotEmergencyStopSignal()
 {
-    if (digitalRead(EMERGENCY_PIN))
-        return 1;
+    // if (digitalRead(EMERGENCY_PIN))
+    //     return 1;
     return 0;
 }
 
-void processExternalInstructions()
+void processExternalSignals()
 {
-    //TODO
+    int distance = readUltrasonic();
+    printing(distance);
 }
+
+void processExternalInstructions(){};
