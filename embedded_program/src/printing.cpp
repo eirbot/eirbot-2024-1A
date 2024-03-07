@@ -10,3 +10,7 @@ void printing(const char *msg) {
 void printing(const int msg){
   Serial.println(msg);
 }
+
+void printing(const float msg){
+  Serial.println(msg);
+}

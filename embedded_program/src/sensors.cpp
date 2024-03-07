@@ -2,9 +2,9 @@
 #include "pins.h"
 #include "printing.h"
 
-int readUltrasonic(){
+float readUltrasonic(){
     long duration;
-    int distance;
+    float distance;
     digitalWrite(trigPin, LOW);
     delayMicroseconds(5);
     digitalWrite(trigPin, HIGH);
@@ -13,7 +13,7 @@ int readUltrasonic(){
     // delayMicroseconds(2);
 
     duration = pulseIn(echoPin, HIGH);
-    printing(duration);
-    distance = duration * 0.034 / 2;
+    // printing(duration);
+    distance = (float) duration * 0.034 / 2.0;
     return distance;
 }

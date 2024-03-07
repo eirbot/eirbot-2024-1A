@@ -1,7 +1,7 @@
 #include "conversions.h"
 
-#define AXLE_TREE_LENGTH 13.1 // centimetres
-#define WHEEL_RADIUS 3.65 // centimetres
+#define AXLE_TREE_LENGTH 12.95 // centimetres
+#define WHEEL_RADIUS 3.63 // centimetres
 #define STEPS_BY_RAD 4074.36654208 // steps/rad
 
 

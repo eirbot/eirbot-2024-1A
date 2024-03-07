@@ -32,12 +32,12 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
     {
         9.0,                           /* Motor supply voltage in V. */
         200,                           /* Min number of steps per revolution for the motor. */
-        1.7,                           /* Max motor phase voltage in A. */
-        3.06,                          /* Max motor phase voltage in V. */
+        1.9,                           /* Max motor phase voltage in A. */
+        3.75,                          /* Max motor phase voltage in V. */
         300.0,                         /* Motor initial speed [step/s]. */
-        700.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
-        500.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        992.0,                         /* Motor maximum speed [step/s]. */
+        300.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        300.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
+        600.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -60,12 +60,12 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
     {
         9.0,                           /* Motor supply voltage in V. */
         200,                           /* Min number of steps per revolution for the motor. */
-        1.7,                           /* Max motor phase voltage in A. */
-        3.06,                          /* Max motor phase voltage in V. */
+        1.9,                           /* Max motor phase voltage in A. */
+        3.75,                          /* Max motor phase voltage in V. */
         300.0,                         /* Motor initial speed [step/s]. */
-        700.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
-        500.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        992.0,                         /* Motor maximum speed [step/s]. */
+        300.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        300.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
+        600.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -115,16 +115,16 @@ void reculer(unsigned int pas){
 
 void tournerDroite(int pasG, int pasD){
 
-    motors[0]->prepare_move(StepperMotor::FWD, pasG);
-    motors[1]->prepare_move(StepperMotor::BWD, pasD);
+    motors[1]->prepare_move(StepperMotor::FWD, pasG);
+    motors[0]->prepare_move(StepperMotor::BWD, pasD);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
 void tournerGauche(int pasG, int pasD){
 
-    motors[0]->prepare_move(StepperMotor::BWD, pasG);
-    motors[1]->prepare_move(StepperMotor::FWD, pasD);
+    motors[1]->prepare_move(StepperMotor::BWD, pasG);
+    motors[0]->prepare_move(StepperMotor::FWD, pasD);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }

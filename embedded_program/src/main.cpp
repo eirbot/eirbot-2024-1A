@@ -32,7 +32,7 @@ void scheduleNextInstruction()
     setMotorsSteps(dequeueInstruction());
 }
 
-const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals
+const unsigned int DELTA_T = 50; // Each time the board will inspect the received signals
 unsigned int t = 0;
 
 void setup()
@@ -46,8 +46,10 @@ void setup()
 
 void loop()
 {
+    Serial.println("loop");
     if (t++ == DELTA_T) {
         t = 0;
+        Serial.println("ni");
         processOutsideSignals();
     }
     if (isStepperFree())

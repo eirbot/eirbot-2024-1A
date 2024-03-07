@@ -41,17 +41,26 @@ void setMotorsSteps(struct instruction instrct)
             tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
         }
             break;
-            case 'l':
+        case 'l':
         {
             set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
             tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
         }
             break;
+        case 's':
         {
+            setSpeed(instrct.value);
+        }
+            break;
         case 'w':
+        {
             remaining_time = instrct.value * (1000/DELAY_PER_STEP);
         }
             break;
+        case 'e':
+        {
+            while(1);
+        }
         
         default:
             break;

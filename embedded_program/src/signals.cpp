@@ -13,7 +13,7 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    // int distance = readUltrasonic();
+    // float distance = readUltrasonic();
     // printing(distance);
 }
 
