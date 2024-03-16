@@ -20,9 +20,5 @@ offset = Vector2(-10, -10)
 anchor_mode = 0
 zoom = Vector2(0.555, 0.555)
 
-[node name="SolarPanel" parent="." instance=ExtResource("2_juqbr")]
-position = Vector2(543, 1066)
-scale = Vector2(0.265, 0.265)
-
 [node name="Constants" type="Node" parent="."]
 script = ExtResource("2_ikwb7")
