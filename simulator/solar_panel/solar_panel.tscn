@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy0e8rt1nrqrf"]
+
+[ext_resource type="Texture2D" uid="uid://1amtrtxl8bu8" path="res://solar_panel/solar_panel.png" id="1_ars31"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26u61"]
+size = Vector2(352, 358)
+
+[node name="SolarPanel" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+constant_angular_velocity = 0.0174533
+metadata/_edit_horizontal_guides_ = [-179.0, 179.0]
+metadata/_edit_vertical_guides_ = [-176.0, 176.0]
+
+[node name="SolarPanel" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_ars31")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_26u61")

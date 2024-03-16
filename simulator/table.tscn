@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cui0edm8qc4dy"]
+
+[ext_resource type="Script" path="res://gen_table.gd" id="1_6030x"]
+[ext_resource type="Texture2D" uid="uid://d3rh4d2a8c5jy" path="res://table_plan.png" id="1_c2suv"]
+[ext_resource type="Script" path="res://Constants.gd" id="2_ikwb7"]
+[ext_resource type="PackedScene" uid="uid://dy0e8rt1nrqrf" path="res://solar_panel/solar_panel.tscn" id="2_juqbr"]
+
+[node name="Table" type="Node2D"]
+script = ExtResource("1_6030x")
+solar_panel_scene = ExtResource("2_juqbr")
+metadata/_edit_horizontal_guides_ = [1080.0]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1620.0
+offset_bottom = 1080.0
+texture = ExtResource("1_c2suv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(-10, -10)
+anchor_mode = 0
+zoom = Vector2(0.555, 0.555)
+
+[node name="SolarPanel" parent="." instance=ExtResource("2_juqbr")]
+position = Vector2(543, 1066)
+scale = Vector2(0.265, 0.265)
+
+[node name="Constants" type="Node" parent="."]
+script = ExtResource("2_ikwb7")
