@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfvakr3jug1mi"]
+
+[ext_resource type="Texture2D" uid="uid://dakfxyx0gjy28" path="res://plant/plants.png" id="1_vw0i1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fh0bv"]
+radius = 60.0083
+
+[node name="SolarPanel" type="Sprite2D"]
+texture = ExtResource("1_vw0i1")
+vframes = 2
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_fh0bv")

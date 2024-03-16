@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://cui0edm8qc4dy"]
+[gd_scene load_steps=6 format=3 uid="uid://cui0edm8qc4dy"]
 
 [ext_resource type="Script" path="res://gen_table.gd" id="1_6030x"]
 [ext_resource type="Texture2D" uid="uid://d3rh4d2a8c5jy" path="res://table_plan.png" id="1_c2suv"]
 [ext_resource type="Script" path="res://Constants.gd" id="2_ikwb7"]
 [ext_resource type="PackedScene" uid="uid://dy0e8rt1nrqrf" path="res://solar_panel/solar_panel.tscn" id="2_juqbr"]
+[ext_resource type="PackedScene" uid="uid://bfvakr3jug1mi" path="res://plant/plant.tscn" id="3_xj1xh"]
 
 [node name="Table" type="Node2D"]
 script = ExtResource("1_6030x")
 solar_panel_scene = ExtResource("2_juqbr")
+plant_scene = ExtResource("3_xj1xh")
 metadata/_edit_horizontal_guides_ = [1080.0]
 
 [node name="TextureRect" type="TextureRect" parent="."]
