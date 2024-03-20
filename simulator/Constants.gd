@@ -21,4 +21,6 @@ extends Node
 	Vector2i(1965, 2000), Vector2i(1387, 2965), Vector2i(612, 2965)
 	];
 
-@export var ROBOT_SHAPE = Vector2(306, 192.5);
+@export var ROBOT_SHAPE = Vector2(306, 192.5); # robot 2D body without the arm
+@export var INITIAL_POSITION_BLUE_TEAM = Vector2i(3000-300, 1000);
+

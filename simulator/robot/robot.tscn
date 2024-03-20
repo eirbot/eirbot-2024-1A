@@ -8,25 +8,24 @@
 size = Vector2(49.5, 39)
 
 [node name="Robot" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [206.0]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_v5hf1")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
-position = Vector2(537, -109)
 polygon = PackedVector2Array(555.5, -165, 578.5, -165, 578.5, 118, 555.5, 118, 555.5, 317, -465.5, 317, -465.5, 364, -578.5, 364, -578.5, 194, -465.5, 194, -465.5, 118, -487.5, 118, -487.5, -165, -465.5, -165, -465.5, -364, 555.5, -364)
 
 [node name="RobotWitoutArm" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(537, -109)
 texture = ExtResource("1_s0xql")
 
 [node name="Arm" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(-250, 60)
+position = Vector2(-786.5, 169.501)
 rotation = 1.5708
 texture = ExtResource("2_x38mt")
 hframes = 2
 
 [node name="ArmCollision" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(-552.5, 59.75)
+position = Vector2(-1089, 169.251)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_vweyy")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://cui0edm8qc4dy"]
+[gd_scene load_steps=7 format=3 uid="uid://cui0edm8qc4dy"]
 
 [ext_resource type="Script" path="res://gen_table.gd" id="1_6030x"]
 [ext_resource type="Texture2D" uid="uid://d3rh4d2a8c5jy" path="res://table_plan.png" id="1_c2suv"]
 [ext_resource type="Script" path="res://Constants.gd" id="2_ikwb7"]
 [ext_resource type="PackedScene" uid="uid://dy0e8rt1nrqrf" path="res://solar_panel/solar_panel.tscn" id="2_juqbr"]
 [ext_resource type="PackedScene" uid="uid://bfvakr3jug1mi" path="res://plant/plant.tscn" id="3_xj1xh"]
+[ext_resource type="PackedScene" uid="uid://cxmd8k5bg8ib2" path="res://robot/robot.tscn" id="6_2i4cv"]
 
 [node name="Table" type="Node2D"]
 script = ExtResource("1_6030x")
@@ -13,14 +14,17 @@ plant_scene = ExtResource("3_xj1xh")
 metadata/_edit_horizontal_guides_ = [1080.0]
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1620.0
-offset_bottom = 1080.0
+offset_right = 2581.0
+offset_bottom = 1720.0
 texture = ExtResource("1_c2suv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(-10, -10)
 anchor_mode = 0
-zoom = Vector2(0.555, 0.555)
+zoom = Vector2(0.33, 0.33)
 
 [node name="Constants" type="Node" parent="."]
 script = ExtResource("2_ikwb7")
+
+[node name="Robot" parent="." instance=ExtResource("6_2i4cv")]
+position = Vector2(329, 1105)
