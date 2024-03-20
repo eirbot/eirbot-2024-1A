@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxmd8k5bg8ib2"]
+
+[ext_resource type="Texture2D" uid="uid://dyavvhx3csmt4" path="res://robot/robot_witout_arm.svg" id="1_s0xql"]
+[ext_resource type="Script" path="res://robot/robot.gd" id="1_v5hf1"]
+[ext_resource type="Texture2D" uid="uid://cbcj5s55qyfqh" path="res://robot/arm.svg" id="2_x38mt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vweyy"]
+size = Vector2(49.5, 39)
+
+[node name="Robot" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_v5hf1")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(537, -109)
+polygon = PackedVector2Array(555.5, -165, 578.5, -165, 578.5, 118, 555.5, 118, 555.5, 317, -465.5, 317, -465.5, 364, -578.5, 364, -578.5, 194, -465.5, 194, -465.5, 118, -487.5, 118, -487.5, -165, -465.5, -165, -465.5, -364, 555.5, -364)
+
+[node name="RobotWitoutArm" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(537, -109)
+texture = ExtResource("1_s0xql")
+
+[node name="Arm" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-250, 60)
+rotation = 1.5708
+texture = ExtResource("2_x38mt")
+hframes = 2
+
+[node name="ArmCollision" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-552.5, 59.75)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_vweyy")

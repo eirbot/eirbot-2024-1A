@@ -10,7 +10,7 @@ extends Node
 	];
 @export var SOLAR_PANEL_SIDE_SIZE: int = 100;
 @export var POT_SPOT_RADIUS: int = 125;
-@export var POT_RADIUS: int = 60;
+@export var POT_RADIUS: int = 55;
 @export var PLANTS: Array[Vector2i] = [
 	Vector2i(1000, 1300), Vector2i(1000, 700), Vector2i(1500, 1500),
 	Vector2i(1500, 500), Vector2i(2000, 1300), Vector2i(2000, 700),
@@ -20,3 +20,5 @@ extends Node
 	Vector2i(1387, 35), Vector2i(612, 35), Vector2i(1965, 1000),
 	Vector2i(1965, 2000), Vector2i(1387, 2965), Vector2i(612, 2965)
 	];
+
+@export var ROBOT_SHAPE = Vector2(306, 192.5);
