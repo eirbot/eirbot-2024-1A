@@ -3,8 +3,11 @@
 #include "conversions.h"
 #include "Arduino.h"
 #include "pins.h"
+#include "variables.h"
+#include "printing.h"
+#include "oled_screen.h"
 
-#define DELAY_PER_STEP 200 // 0.2s
+#define DELAY_PER_STEP 20 // 0.02s
 
 unsigned int remaining_time; // multiple of 0.2s 
 
@@ -12,10 +15,13 @@ void initiateBoardVars()
 {
     remaining_time = 0;
     pinMode(trigPin, OUTPUT);
-    pinMode(echoPin, INPUT);
+    pinMode(echoPinF, INPUT);
+    pinMode(echoPinB, INPUT);
     // pinMode(EMERGENCY_PIN, INPUT);
     // digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
+    oled_setup();
+    // changeVar(manual, 1);
 }
 
 void setMotorsSteps(struct instruction instrct)
@@ -26,12 +32,14 @@ void setMotorsSteps(struct instruction instrct)
         case 'f':
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+            changeVar(forward, 1);
             avancer(right_wheel_data.step_number);
         }
             break;
         case 'b':
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+            changeVar(forward, 0);
             reculer(right_wheel_data.step_number);
         }
             break;
@@ -88,4 +96,6 @@ char isStepperFree()
 void abortRunningTask()
 {
     hardStop();
+    int posL = motorPos(left);
+    int posR = motorPos(right);
 }

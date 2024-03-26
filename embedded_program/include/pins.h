@@ -3,6 +3,7 @@
 
 // #define EMERGENCY_PIN D7
 #define trigPin D6
-#define echoPin D7
+#define echoPinF D7
+#define echoPinB D8
 
 #endif

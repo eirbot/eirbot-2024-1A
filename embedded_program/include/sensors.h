@@ -1,6 +1,6 @@
 #ifndef __SENSORS_H__
 #define __SENSORS_H__
 
-float readUltrasonic();
+float readUltrasonic(char FwdBwd);
 
 #endif

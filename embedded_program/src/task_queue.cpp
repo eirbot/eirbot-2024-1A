@@ -15,7 +15,7 @@ char isQueueEmpty()
 struct instruction dequeueInstruction()
 {
     if (isQueueEmpty()) {
-        struct instruction error_instruction = {'e', 0}; 
+        struct instruction error_instruction = {'q', 0}; 
         return error_instruction;
     }
     struct instruction i = queue[head_cursor];

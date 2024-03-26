@@ -1,6 +1,7 @@
 #include "SPI.h"
 #include "XNucleoIHM02A1.h"
 #include "L6470.h"
+#include "steppers.h"
 
 /* Definitions ---------------------------------------------------------------*/
 
@@ -100,15 +101,15 @@ void board_setup()
 }
 
 void avancer(unsigned int pas){
-    motors[0]->prepare_move(StepperMotor::FWD, pas);
     motors[1]->prepare_move(StepperMotor::FWD, pas);
+    motors[0]->prepare_move(StepperMotor::FWD, pas);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
 void reculer(unsigned int pas){
-    motors[0]->prepare_move(StepperMotor::BWD, pas);
     motors[1]->prepare_move(StepperMotor::BWD, pas);
+    motors[0]->prepare_move(StepperMotor::BWD, pas);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
@@ -145,4 +146,12 @@ void setSpeed(int stepPerSec){
 
 char motor_free(){
     return !(motors[0]->is_active() || motors[1]->is_active());
+}
+
+int motorPos(enum motor motor){
+    return motors[motor]->get_position();
+}
+
+int motorPar(enum motor motor){
+    return motors[motor]->get_parameter(L6470_CONFIG_ID);
 }
