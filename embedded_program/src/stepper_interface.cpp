@@ -91,6 +91,47 @@ void setMotorsSteps(struct instruction instrct)
         {
             while(1);
         }
+        break;
+
+        case '1':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            changeVar(forward, 1);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
+            avancer(right_wheel_data.step_number);
+        }
+            break;
+        case '2':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            changeVar(forward, 0);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
+            reculer(right_wheel_data.step_number);
+        }
+            break;
+        case '3':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            left_wheel_data.step_number = (unsigned int) instrct.value;
+            tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
+        }
+            break;
+        case '4':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            left_wheel_data.step_number = (unsigned int) instrct.value;
+            tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
+        }
         
         default:
             break;
