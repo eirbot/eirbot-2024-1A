@@ -49,3 +49,5 @@ void enqueueInstruction(struct instruction instrct)
         // TODO: define an error if the queue is full
     }
 }
+
+void pushInstruction(struct instruction instrct) {};

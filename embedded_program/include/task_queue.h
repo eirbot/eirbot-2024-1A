@@ -23,6 +23,13 @@ void clearQueue();
 */
 void enqueueInstruction(struct instruction instrct);
 
+
+/**
+ * Add the instruction in priority in the queue 
+ * @param instrct The instruction to be added.
+ */
+void pushInstruction(struct instruction instrct);
+
 /**
  * Returns 1 if the queue is empty, else 0.
 */
