@@ -35,6 +35,10 @@ void clearQueue() {
     queue_empty = 1;
 }
 
+void raiseFullQueueError() {
+    // TODO: define an error if the queue is full
+}
+
 void enqueueInstruction(struct instruction instrct)
 {
     if (queue_empty || tail_cursor != head_cursor) {
@@ -45,9 +49,18 @@ void enqueueInstruction(struct instruction instrct)
             tail_cursor--;
         else
             tail_cursor = MAX_QUEUE_SIZE-1;
-    } else {
-        // TODO: define an error if the queue is full
-    }
+    } else
+        raiseFullQueueError();
 }
 
-void pushInstruction(struct instruction instrct) {};
+void pushInstruction(struct instruction instrct) {
+    if (queue_empty || tail_cursor != head_cursor) {
+        if (queue_empty)
+            queue_empty = 0;
+        if (head_cursor < MAX_QUEUE_SIZE - 1)
+            queue[++head_cursor] = instrct;
+        else
+            queue[head_cursor = 0] = instrct;
+    } else
+        raiseFullQueueError();
+}
