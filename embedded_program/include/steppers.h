@@ -18,5 +18,6 @@ void hardStop();
 //void motor_step();
 int motorPos(enum motor motor);
 int motorPar(enum motor motor);
+void motorSetHome(enum motor motor);
 
 #endif

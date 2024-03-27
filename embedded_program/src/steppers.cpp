@@ -9,7 +9,7 @@
 #define MPR_1 4
 
 /* Number of steps. */
-#define STEPS_1 (400 * 128)   /* 1 revolution given a 400 steps motor configured at 1/128 microstep mode. */
+#define STEPS_1 (200 * 128)   /* 1 revolution given a 400 steps motor configured at 1/128 microstep mode. */
 #define STEPS_2 (STEPS_1 * 2)
 
 /* Delay in milliseconds. */
@@ -150,6 +150,10 @@ char motor_free(){
 
 int motorPos(enum motor motor){
     return motors[motor]->get_position();
+}
+
+void motorSetHome(enum motor motor){
+    motors[motor]->set_home();
 }
 
 int motorPar(enum motor motor){

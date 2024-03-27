@@ -5,9 +5,7 @@
 #include "signals.h"
 #include "Arduino.h"
 #include "printing.h"
-// #include "SoftwareSerial.h"
 
-HardwareSerial Serial1(D0, D1); // RX, TX
 
 const unsigned int MAX_SEQUENCE_LENGTH = 200;
 
@@ -37,7 +35,6 @@ void processOutsideSignals()
 
 void scheduleNextInstruction()
 {
-    // printing("oui");
     if (isQueueEmpty())
         inspectEnvironmentAndComputeNewStrategy();
     setMotorsSteps(dequeueInstruction());
@@ -51,20 +48,15 @@ void setup()
     initiateBoardVars();
     t = 0;
     Serial.begin(9600);
-    pinMode(D9, OUTPUT);
-    digitalWrite(D9, LOW);
 }
 
 void loop()
 {
-    // Serial.println("loop");
     if (t++ == DELTA_T) {
         t = 0;
-        // Serial.println("signals");
         processOutsideSignals();
     }
     if (isStepperFree()){
-        // Serial.println("stepperFree");
         scheduleNextInstruction();
     }
     executeOneMotorStep();
