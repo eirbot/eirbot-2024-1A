@@ -3,6 +3,7 @@
 
 char forwardVal = 1;
 char manualVal = 0;
+char waitVal = 0;
 
 void changeVar(enum variableName variableName, int value){
     switch(variableName){
@@ -15,6 +16,12 @@ void changeVar(enum variableName variableName, int value){
         case 2:
         {
             manualVal = value;
+        }
+        break;
+
+        case 3:
+        {
+            waitVal = value;
         }
         break;
 
@@ -34,6 +41,12 @@ int checkVar(enum variableName variableName){
         case 2:
         {
             return manualVal;
+        }
+        break;
+
+        case 3:
+        {
+            return waitVal;
         }
         break;
 

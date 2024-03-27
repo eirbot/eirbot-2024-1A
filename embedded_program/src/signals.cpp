@@ -7,10 +7,8 @@
 #include "oled_screen.h"
 #include "steppers.h"
 #include "stepper_interface.h"
+#include "signals.h"
 
-// extern "C++" {
-    #include "signals.h"
-// }
 
 char gotEmergencyStopSignal()
 {
@@ -33,9 +31,11 @@ void processExternalSignals()
 
     int par = motorPar(left);
 
-    if (distance < 10 && distance > 0.1){
+    if (distance < 10 && distance > 0.1 && !checkVar(wait)){
         abortRunningTask();
-        enqueueInstruction({'w', 1.0});
+        if(checkVar(forward)) pushInstruction({'f', remainingSteps});
+        else pushInstruction({'b', remainingSteps});
+        pushInstruction({'w', 1.0});
     }
 
     oledPrintln(checkVar(forward), 15, 0);

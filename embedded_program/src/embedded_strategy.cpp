@@ -57,5 +57,5 @@ void ramenerLesPots(){
 void inspectEnvironmentAndComputeNewStrategy()
 {
     //TODO: enqueue a cyclic instruction
-    allerRetour();
+    ramenerLesPots();
 };

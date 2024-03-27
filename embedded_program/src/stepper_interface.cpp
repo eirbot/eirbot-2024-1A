@@ -23,6 +23,8 @@ void initiateBoardVars()
     pinMode(trigPin, OUTPUT);
     pinMode(echoPinF, INPUT);
     pinMode(echoPinB, INPUT);
+    pinMode(D9, OUTPUT);
+    digitalWrite(D9, LOW);
     // pinMode(EMERGENCY_PIN, INPUT);
     // digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
@@ -39,6 +41,9 @@ void setMotorsSteps(struct instruction instrct)
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
             changeVar(forward, 1);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
             avancer(right_wheel_data.step_number);
         }
             break;
@@ -46,6 +51,9 @@ void setMotorsSteps(struct instruction instrct)
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
             changeVar(forward, 0);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
             reculer(right_wheel_data.step_number);
         }
             break;
@@ -53,22 +61,30 @@ void setMotorsSteps(struct instruction instrct)
         {
             set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
             tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
         }
             break;
         case 'l':
         {
             set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
             tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            changeVar(wait, 0);
+            motorSetHome(right);
+            motorSetHome(left);
         }
             break;
         case 's':
         {
             setSpeed(instrct.value);
+            changeVar(wait, 0);
         }
             break;
         case 'w':
         {
             remaining_time = instrct.value * (1000/DELAY_PER_STEP);
+            changeVar(wait, 1);
         }
             break;
         case 'e':
