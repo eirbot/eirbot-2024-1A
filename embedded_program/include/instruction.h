@@ -5,11 +5,15 @@
  * Instruction types:
  * - 'f': rectilign forward movement (distance in cm)
  * - 'b': rectilign backward movement (distance in cm)
- * - 'r': static right rotation (angle in rad)
- * - 'l': static left rotation (angle in rad)
+ * - 'r': static non-trigo rotation (angle in rad)
+ * - 'l': static trigo rotation (angle in rad)
  * - 'w': wait (time in seconds)
  * - 's': set speed in step per second
-*/
+ * - '1': rectilign forward movement (in step number)
+ * - '2': rectiling backward movement (in step number)
+ * - '3': static non-trigo rotation (in step number)
+ * - '4': static trigo rotation (in step number)
+ */
 struct instruction {
     char instruction_type;
     float value;
