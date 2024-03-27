@@ -9,11 +9,17 @@
 
 #define DELAY_PER_STEP 20 // 0.02s
 
-unsigned int remaining_time; // multiple of 0.2s 
+unsigned int remaining_time; // multiple of 0.2s
+// the expected total number of steps achieved by the left wheel after the current instruction
+unsigned int scheduledStepNumberL;
+// the expected total number of steps achieved by the right wheel after the current instruction
+unsigned int scheduledStepNumberR;
 
 void initiateBoardVars()
 {
     remaining_time = 0;
+    scheduledStepNumberL = 0;
+    scheduledStepNumberR = 0;
     pinMode(trigPin, OUTPUT);
     pinMode(echoPinF, INPUT);
     pinMode(echoPinB, INPUT);
@@ -73,6 +79,8 @@ void setMotorsSteps(struct instruction instrct)
         default:
             break;
     }
+    scheduledStepNumberL = left_wheel_data.step_number;
+    scheduledStepNumberR = left_wheel_data.step_number;
     
 }
 
@@ -93,9 +101,10 @@ char isStepperFree()
         return 0;
 }
 
-void abortRunningTask()
+int abortRunningTask()
 {
     hardStop();
     int posL = motorPos(left);
     int posR = motorPos(right);
+    return scheduledStepNumberR - posR;
 }

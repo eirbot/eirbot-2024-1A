@@ -7,6 +7,7 @@ void initiateBoardVars();
 void setMotorsSteps(struct instruction instrct);
 void executeOneMotorStep();
 char isStepperFree();
-void abortRunningTask();
+
+int abortRunningTask();
 
 #endif
