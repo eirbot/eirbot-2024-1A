@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bfvakr3jug1mi"]
+[gd_scene load_steps=4 format=3 uid="uid://bfvakr3jug1mi"]
 
 [ext_resource type="Texture2D" uid="uid://dakfxyx0gjy28" path="res://plant/plants.png" id="1_vw0i1"]
+[ext_resource type="Script" path="res://plant/RigidBody2D.gd" id="2_ihkhs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fh0bv"]
 radius = 60.0083
@@ -10,6 +11,7 @@ texture = ExtResource("1_vw0i1")
 vframes = 2
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+script = ExtResource("2_ihkhs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_fh0bv")

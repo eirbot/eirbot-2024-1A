@@ -1,7 +1,8 @@
-extends CharacterBody2D
+extends Node2D
 
-@onready var armSprite: Sprite2D = $Arm;
-@onready var armCollider: CollisionShape2D = $ArmCollision;
+@onready var armSprite: Sprite2D = $CharacterBody2D/Arm;
+@onready var armCollider: CollisionShape2D = $CharacterBody2D/ArmCollision;
+@export var speed = Vector2(0,0);
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -15,4 +16,4 @@ func activate():
 	armCollider.disabled = false;
 
 func _physics_process(delta):
-	pass
+	$CharacterBody2D.move_and_collide(speed);

@@ -27,4 +27,5 @@ zoom = Vector2(0.33, 0.33)
 script = ExtResource("2_ikwb7")
 
 [node name="Robot" parent="." instance=ExtResource("6_2i4cv")]
-position = Vector2(329, 1105)
+position = Vector2(551, 664)
+speed = Vector2(-2, 0)
