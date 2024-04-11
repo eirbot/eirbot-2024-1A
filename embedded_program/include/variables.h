@@ -4,8 +4,12 @@
 enum variableName{
     forward = 1,
     manual = 2,
-    wait = 3
+    instruct = 3,
+    team = 4
 };
+
+#define blue 0
+#define yellow 1
 
 void changeVar(enum variableName variableName, int value);
 int checkVar(enum variableName variableName);

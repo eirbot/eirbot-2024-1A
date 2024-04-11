@@ -2,6 +2,8 @@
 #include "XNucleoIHM02A1.h"
 #include "L6470.h"
 #include "steppers.h"
+#include "pins.h"
+#include "Servo.h"
 
 /* Definitions ---------------------------------------------------------------*/
 
@@ -16,6 +18,8 @@
 #define DELAY_1 1000
 #define DELAY_2 2000
 #define DELAY_3 5000
+
+#define SPEED 300
 
 #define SerialPort Serial
 
@@ -35,10 +39,10 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
         200,                           /* Min number of steps per revolution for the motor. */
         1.9,                           /* Max motor phase voltage in A. */
         3.75,                          /* Max motor phase voltage in V. */
-        300.0,                         /* Motor initial speed [step/s]. */
-        300.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
-        300.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        600.0,                         /* Motor maximum speed [step/s]. */
+        150.0,                         /* Motor initial speed [step/s]. */
+        600.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        600.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
+        300.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -63,10 +67,10 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
         200,                           /* Min number of steps per revolution for the motor. */
         1.9,                           /* Max motor phase voltage in A. */
         3.75,                          /* Max motor phase voltage in V. */
-        300.0,                         /* Motor initial speed [step/s]. */
-        300.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
-        300.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        600.0,                         /* Motor maximum speed [step/s]. */
+        150.0,                         /* Motor initial speed [step/s]. */
+        600.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
+        600.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
+        300.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -86,6 +90,8 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
     }
 };
 
+Servo servo; // création de l'objet "servo"
+
 void board_setup()
 {
     /*----- Initialization. -----*/
@@ -98,6 +104,13 @@ void board_setup()
 
     /* Building a list of motor control components. */
     motors = x_nucleo_ihm02a1->get_components();
+
+    servo.attach(servoPin);
+}
+
+void setServo(char angle){
+    servo.write(angle); // demande au servo de se déplacer à cette position
+    // for (int i=0; i<)
 }
 
 void avancer(unsigned int pas){
@@ -107,9 +120,23 @@ void avancer(unsigned int pas){
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
+void avancerVit(){
+    motors[1]->prepare_run(StepperMotor::FWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::FWD, SPEED);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
 void reculer(unsigned int pas){
     motors[1]->prepare_move(StepperMotor::BWD, pas);
     motors[0]->prepare_move(StepperMotor::BWD, pas);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+void reculerVit(){
+    motors[1]->prepare_run(StepperMotor::BWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::BWD, SPEED);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
@@ -122,10 +149,26 @@ void tournerDroite(int pasG, int pasD){
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
+void tournerDroiteVit(){
+
+    motors[1]->prepare_run(StepperMotor::FWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::BWD, SPEED);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
 void tournerGauche(int pasG, int pasD){
 
     motors[1]->prepare_move(StepperMotor::BWD, pasG);
     motors[0]->prepare_move(StepperMotor::FWD, pasD);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+void tournerGaucheVit(){
+
+    motors[1]->prepare_run(StepperMotor::BWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::FWD, SPEED);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
@@ -138,8 +181,14 @@ void hardStop(){
 }
 
 void setSpeed(int stepPerSec){
-    motors[0]->prepare_run(StepperMotor::FWD, stepPerSec);
-    motors[1]->prepare_run(StepperMotor::FWD, stepPerSec);
+    if(stepPerSec >= 0){
+        motors[0]->prepare_run(StepperMotor::FWD, stepPerSec);
+        motors[1]->prepare_run(StepperMotor::FWD, stepPerSec);
+    }
+    else{
+        motors[0]->prepare_run(StepperMotor::BWD, -stepPerSec);
+        motors[1]->prepare_run(StepperMotor::BWD, -stepPerSec);
+    }
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
@@ -156,6 +205,13 @@ void motorSetHome(enum motor motor){
     motors[motor]->set_home();
 }
 
+int motorSpeed(enum motor motor){
+    return motors[motor]->get_speed();
+}
+
 int motorPar(enum motor motor){
     return motors[motor]->get_parameter(L6470_CONFIG_ID);
 }
+
+
+

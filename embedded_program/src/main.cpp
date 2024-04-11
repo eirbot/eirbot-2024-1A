@@ -5,6 +5,7 @@
 #include "signals.h"
 #include "Arduino.h"
 #include "printing.h"
+#include "oled_screen.h"
 
 
 const unsigned int MAX_SEQUENCE_LENGTH = 200;
@@ -59,5 +60,6 @@ void loop()
     if (isStepperFree()){
         scheduleNextInstruction();
     }
+    oledBlink(57);
     executeOneMotorStep();
 }

@@ -3,8 +3,10 @@
 
 void oledPrintln(const char* message, int ligne, int colonne);
 void oledPrintln(const int message, int ligne, int colonne);
+void oledPrintln(const unsigned int message, int ligne, int colonne);
 void oledPrintln(const float message, int ligne, int colonne);
 void oledPrintln(const char message, int ligne, int colonne);
 void oled_setup();
+void oledBlink(int ligne);
 
 #endif

@@ -31,18 +31,18 @@ void processExternalSignals()
 
     int par = motorPar(left);
 
-    if (distance < 10 && distance > 0.1 && !checkVar(wait)){
+    if (distance < 30 && distance > 0.1 && (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')){
         unsigned int remainingSteps = abortRunningTask();
-        if(checkVar(forward)) pushInstruction({'1', (float) remainingSteps});
-        else pushInstruction({'2', (float) remainingSteps});
+        pushInstruction({switchInstuct((char) checkVar(instruct)), (float) remainingSteps});
         pushInstruction({'w', 1.0});
     }
 
-    oledPrintln(checkVar(forward), 15, 0);
-    oledPrintln(distance, 30, 0);
-    oledPrintln(posR, 45, 0);
-    oledPrintln(posL, 60, 0);
-    oledPrintln(par, 15, 64);
+    // oledPrintln((char) checkVar(instruct), 15, 0);
+    oledPrintln(distance, 45, 0);
+    // oledPrintln(posR, 45, 0);
+    // oledPrintln(posL, 60, 0);
+    // oledPrintln(par, 15, 64);
+    oledBlink(3);
 }
 
 void processExternalInstructions(){

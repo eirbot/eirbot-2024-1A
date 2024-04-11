@@ -10,4 +10,6 @@ char isStepperFree();
 
 int abortRunningTask();
 
+char switchInstuct(char instructVal);
+
 #endif
