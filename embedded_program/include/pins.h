@@ -7,5 +7,10 @@
 #define echoPinB D8
 #define tirettePin A0
 #define servoPin D9
+#define BTNC PC4
+#define BTNR PB13
+#define BTNL PB14
+#define BTNU PB15
+#define BTND PB12
 
 #endif
