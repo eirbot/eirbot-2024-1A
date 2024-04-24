@@ -41,7 +41,7 @@ void scheduleNextInstruction()
     setMotorsSteps(dequeueInstruction());
 }
 
-const unsigned int DELTA_T = 50; // Each time the board will inspect the received signals
+const unsigned int DELTA_T = 1; // Each time the board will inspect the received signals
 unsigned int t = 0;
 
 void setup()
@@ -49,6 +49,7 @@ void setup()
     initiateBoardVars();
     t = 0;
     Serial.begin(9600);
+    interface();
 }
 
 void loop()

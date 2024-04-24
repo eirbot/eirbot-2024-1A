@@ -31,7 +31,9 @@ void processExternalSignals()
 
     int par = motorPar(left);
 
-    if (distance < 30 && distance > 0.1 && (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')){
+    printing(distance);
+
+    if (distance < 30 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
         unsigned int remainingSteps = abortRunningTask();
         pushInstruction({switchInstuct((char) checkVar(instruct)), (float) remainingSteps});
         pushInstruction({'w', 1.0});
