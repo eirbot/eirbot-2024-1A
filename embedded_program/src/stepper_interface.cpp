@@ -167,7 +167,7 @@ char isStepperFree()
     //     }
     // }
     // else {
-        if(!remaining_time && digitalRead(tirettePin) /*&& motorSpeed(right) < 5*/) return motor_free();
+        if(!remaining_time /*&& motorSpeed(right) < 5*/) return motor_free();
     // }
     
     return 0;
@@ -201,5 +201,11 @@ char switchInstuct(char instructVal){
         
         default:
         return instructVal;
+    }
+}
+
+void interface(){
+    while(digitalRead(tirettePin)){
+        //
     }
 }
