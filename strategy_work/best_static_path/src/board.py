@@ -1,7 +1,9 @@
 """Definition of the Board data abstract type."""
+import matplotlib.pyplot as plt
 import numpy as np
-import table
 from numpy.typing import NDArray
+
+import table
 
 
 class Board():
@@ -18,3 +20,18 @@ class Board():
         self.__obstacles: NDArray[np.bool_] = np.zeros(self.__shape, np.bool_)
         self.__robot_radius = table.scale(table.ROBOT_RADIUS, resolution)
         self.__pot_radius = table.scale(table.POT_RADIUS, resolution)
+
+    def plot_board(self):
+        """Plot the board with the obstacles."""
+        X = np.linspace(0, table.WIDTH, self.__shape[0])
+        Y = np.linspace(0, table.HEIGHT, self.__shape[1])
+        plt.figure()
+        plt.pcolormesh(X, Y, self.__obstacles.T, shading='auto')
+        plt.xlabel('x (cm)')
+        plt.ylabel('y (cm)')
+        plt.show()
+
+
+if __name__ == "__main__":
+    b = Board(500)
+    b.plot_board()
