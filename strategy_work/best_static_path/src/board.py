@@ -21,6 +21,18 @@ class Board():
         self.__robot_radius = table.scale(table.ROBOT_RADIUS, resolution)
         self.__pot_radius = table.scale(table.POT_RADIUS, resolution)
 
+
+    def compute_edges(self) -> NDArray[np.float_]:
+        """
+        Returns
+        -------
+        edges: ndarray of shape (N, M, N, M)
+        Each element (i, j, k, m) of `edges` contains the label of the edge
+        ((i, j), (k, m))
+        """
+        edges = np.zeros()
+        pass
+
     def plot_board(self):
         """Plot the board with the obstacles."""
         X = np.linspace(0, table.WIDTH, self.__shape[0])

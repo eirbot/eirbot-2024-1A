@@ -35,5 +35,7 @@ robot should stop to rotate.
 
 However the algorithm might be slow if it always first try to take path with small
 edges. To speed it up, we use an heuristic which will incite to take big edges
-pointing to the closest rectilinearly joinable positions with the final
+pointing to rectilinearly joinable positions which are the closest to the final
 position.
+
+
