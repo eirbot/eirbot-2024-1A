@@ -92,6 +92,10 @@ void laDanseDuRobot(){
     enqueueInstruction({'w', 1});
 }
 
+void staticPath() {
+    
+}
+
 void inspectEnvironmentAndComputeNewStrategy()
 {
     //TODO: enqueue a cyclic instruction
