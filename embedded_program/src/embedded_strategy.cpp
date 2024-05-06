@@ -22,24 +22,24 @@ void allerRetourVitesse(float distance){
 }
 
 void carre(){
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'f', 50});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'f', 50});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'f', 50});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
     
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'f', 50});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 }
 
@@ -95,7 +95,7 @@ void laDanseDuRobot(){
 void inspectEnvironmentAndComputeNewStrategy()
 {
     //TODO: enqueue a cyclic instruction
-    enqueueInstruction({'a', 0});   
+    // enqueueInstruction({'a', 0});   
     carre();
     // allerRetour(60);
 };

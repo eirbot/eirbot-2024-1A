@@ -33,7 +33,7 @@ void changeVar(enum variableName variableName, int value){
         break;
 
         default:
-        printing("Wrong variable name in changeVar");
+        printingStr("Wrong variable name in changeVar");
     }
 }
 
@@ -64,7 +64,7 @@ int checkVar(enum variableName variableName){
         break;
 
         default:
-        printing("Wrong variable name in checkVar");
+        printingStr("Wrong variable name in checkVar");
     }
     return -1;
 }

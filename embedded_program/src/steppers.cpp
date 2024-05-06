@@ -114,50 +114,34 @@ void setServo(char angle){
 }
 
 void avancer(unsigned int pas){
-    motors[1]->prepare_move(StepperMotor::FWD, pas);
-    motors[0]->prepare_move(StepperMotor::FWD, pas);
-
-    x_nucleo_ihm02a1->perform_prepared_actions();
-}
-
-void avancerVit(){
-    motors[1]->prepare_run(StepperMotor::FWD, SPEED);
-    motors[0]->prepare_run(StepperMotor::FWD, SPEED);
-
-    x_nucleo_ihm02a1->perform_prepared_actions();
-}
-
-void reculer(unsigned int pas){
     motors[1]->prepare_move(StepperMotor::BWD, pas);
     motors[0]->prepare_move(StepperMotor::BWD, pas);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void reculerVit(){
+void avancerVit(){
     motors[1]->prepare_run(StepperMotor::BWD, SPEED);
     motors[0]->prepare_run(StepperMotor::BWD, SPEED);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void tournerDroite(int pasG, int pasD){
-
-    motors[1]->prepare_move(StepperMotor::FWD, pasG);
-    motors[0]->prepare_move(StepperMotor::BWD, pasD);
+void reculer(unsigned int pas){
+    motors[1]->prepare_move(StepperMotor::FWD, pas);
+    motors[0]->prepare_move(StepperMotor::FWD, pas);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void tournerDroiteVit(){
-
+void reculerVit(){
     motors[1]->prepare_run(StepperMotor::FWD, SPEED);
-    motors[0]->prepare_run(StepperMotor::BWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::FWD, SPEED);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void tournerGauche(int pasG, int pasD){
+void tournerDroite(int pasG, int pasD){
 
     motors[1]->prepare_move(StepperMotor::BWD, pasG);
     motors[0]->prepare_move(StepperMotor::FWD, pasD);
@@ -165,10 +149,26 @@ void tournerGauche(int pasG, int pasD){
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void tournerGaucheVit(){
+void tournerDroiteVit(){
 
     motors[1]->prepare_run(StepperMotor::BWD, SPEED);
     motors[0]->prepare_run(StepperMotor::FWD, SPEED);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+void tournerGauche(int pasG, int pasD){
+
+    motors[1]->prepare_move(StepperMotor::FWD, pasG);
+    motors[0]->prepare_move(StepperMotor::BWD, pasD);
+
+    x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+void tournerGaucheVit(){
+
+    motors[1]->prepare_run(StepperMotor::FWD, SPEED);
+    motors[0]->prepare_run(StepperMotor::BWD, SPEED);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
@@ -182,12 +182,12 @@ void hardStop(){
 
 void setSpeed(int stepPerSec){
     if(stepPerSec >= 0){
-        motors[0]->prepare_run(StepperMotor::FWD, stepPerSec);
-        motors[1]->prepare_run(StepperMotor::FWD, stepPerSec);
+        motors[0]->prepare_run(StepperMotor::BWD, stepPerSec);
+        motors[1]->prepare_run(StepperMotor::BWD, stepPerSec);
     }
     else{
-        motors[0]->prepare_run(StepperMotor::BWD, -stepPerSec);
-        motors[1]->prepare_run(StepperMotor::BWD, -stepPerSec);
+        motors[0]->prepare_run(StepperMotor::FWD, -stepPerSec);
+        motors[1]->prepare_run(StepperMotor::FWD, -stepPerSec);
     }
 
     x_nucleo_ihm02a1->perform_prepared_actions();

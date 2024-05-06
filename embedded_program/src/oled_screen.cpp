@@ -103,7 +103,7 @@ void oled_setup() {
   // ecranOLED.setFont(&FreeSerif9pt7b);       // Sélection de la police "Free Serif"
   // ecranOLED.println("FreeSerif");           // …et affichage du nom de cette police
 
-  ecranOLED.fillRect(0, -15, 128, 20, BLACK);
+  // ecranOLED.fillRect(0, -15, 128, 20, BLACK);
 
   ecranOLED.display();
 

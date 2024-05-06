@@ -3,14 +3,14 @@ extern "C++" {
   #include "printing.h"
 }
 
-void printing(const char *msg) {
+void printingStr(const char *msg) {
   Serial.println(msg);
 }
 
-void printing(const int msg){
+void printingInt(const int msg){
   Serial.println(msg);
 }
 
-void printing(const float msg){
+void printingFloat(const float msg){
   Serial.println(msg);
 }

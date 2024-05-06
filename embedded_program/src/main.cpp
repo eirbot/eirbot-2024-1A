@@ -13,15 +13,16 @@ const unsigned int MAX_SEQUENCE_LENGTH = 200;
 
 void processOutsideSignals()
 {
-    if (gotEmergencyStopSignal()) {
-        Serial.println("emergencySignal");
-        abortRunningTask();
-        struct instruction wait = {'w', 2.0}; // Wait 2 seconds
-        clearQueue();
-        enqueueInstruction(wait);
-    } else{
+    // if (gotEmergencyStopSignal()) {
+    //     Serial.println("emergencySignal");
+    //     abortRunningTask();
+    //     struct instruction wait = {'w', 2.0}; // Wait 2 seconds
+    //     clearQueue();
+    //     enqueueInstruction(wait);
+    // } else{
         processExternalSignals();
         processExternalInstructions();
+        oledBlink(3);
         // Serial.println("processOutsideSignals");
         // if(Serial1.available()){
         //     digitalWrite(D9, HIGH);
@@ -30,7 +31,7 @@ void processOutsideSignals()
         //     enqueueInstruction({'f', (float) message});
         //     enqueueInstruction({'w', 0.5});
         // }
-    }
+    // }
 }
 
 
@@ -41,15 +42,16 @@ void scheduleNextInstruction()
     setMotorsSteps(dequeueInstruction());
 }
 
-const unsigned int DELTA_T = 1; // Each time the board will inspect the received signals
+const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals
 unsigned int t = 0;
 
 void setup()
 {
     initiateBoardVars();
-    t = 0;
+    // t = 0;
     Serial.begin(9600);
     interface();
+    Serial.println("end setup");
 }
 
 void loop()

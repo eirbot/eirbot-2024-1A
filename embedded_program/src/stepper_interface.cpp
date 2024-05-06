@@ -7,6 +7,7 @@
 #include "printing.h"
 #include "oled_screen.h"
 #include "task_queue.h"
+#include "sensors.h"
 
 #define DELAY_PER_STEP 20 // 0.02s
 
@@ -21,11 +22,26 @@ void initiateBoardVars()
     remaining_time = 0;
     scheduledStepNumberL = 0;
     scheduledStepNumberR = 0;
-    pinMode(trigPin, OUTPUT);
-    pinMode(echoPinF, INPUT);
-    pinMode(echoPinB, INPUT);
+    pinMode(trigPinM, OUTPUT);
+    pinMode(trigPinL, OUTPUT);
+    pinMode(trigPinR, OUTPUT);
+
+    pinMode(echoPinFM, INPUT);
+    pinMode(echoPinFL, INPUT);
+    pinMode(echoPinFR, INPUT);
+    
+    pinMode(echoPinBM, INPUT);
+    pinMode(echoPinBL, INPUT);
+    pinMode(echoPinBR, INPUT);
+
     pinMode(servoPin, OUTPUT);
     pinMode(tirettePin, INPUT_PULLUP);
+
+    pinMode(BTNC, INPUT_PULLUP);
+    pinMode(BTN1, INPUT_PULLUP);
+    pinMode(BTN2, INPUT_PULLUP);
+    pinMode(BTN3, INPUT_PULLUP);
+    pinMode(BTN4, INPUT_PULLUP);
     // pinMode(EMERGENCY_PIN, INPUT);
     // digitalWrite(EMERGENCY_PIN, LOW);
     board_setup();
@@ -205,7 +221,52 @@ char switchInstuct(char instructVal){
 }
 
 void interface(){
-    while(digitalRead(tirettePin)){
-        //
+    char LRM = 1;
+    while(!digitalRead(tirettePin)){
+
+        if(digitalRead(BTN1) && checkVar(team) == blue){
+            changeVar(team, yellow);
+        }
+        if(!digitalRead(BTN1) && checkVar(team) == yellow){
+            changeVar(team, blue);
+        }
+
+        oledPrintln(checkVar(team)? "equ jaune" : "equ bleue",15, 0);
+
+        if(!digitalRead(BTN2) && checkVar(forward)) {
+            changeVar(forward, 0);
+            oledBlink(50);
+        }
+        if(digitalRead(BTN2) && !checkVar(forward)) {
+            changeVar(forward, 1);
+            oledBlink(50);
+        }
+
+        if(digitalRead(BTN3)){
+
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic(checkVar(forward)? 'f' : 'b', i);
+                oledPrintln(distance, 15*i + 15, 0);
+            }
+        }
+        else{
+            float distance = readUltrasonic(checkVar(forward)? 'f' : 'b', LRM);
+            oledPrintln(distance, 30, 0);
+            oledPrintln((float) LRM, 45, 0);
+        }
+
+        if(!digitalRead(BTNC)){
+            while(!digitalRead(BTNC));
+            LRM ++;
+            if(LRM == 4) LRM = 1;
+        }        
+
+        if(digitalRead(BTN4)){
+            while(digitalRead(BTN4));
+            avancer(50000);
+        }
+
+        oledBlink(20);
     }
 }

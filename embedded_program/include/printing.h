@@ -1,8 +1,8 @@
 #ifndef __PRINTING_H__
 #define __PRINTING_H__
 
-void printing(const char *msg);
-void printing(const int msg);
-void printing(const float msg);
+void printingStr(const char *msg);
+void printingInt(const int msg);
+void printingFloat(const float msg);
 
 #endif
