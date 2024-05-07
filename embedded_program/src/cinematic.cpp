@@ -3,6 +3,9 @@
 #include "instruction.h"
 #include <math.h>
 
+#define YES 1
+#define NO 0
+
 /**
  * @brief Return a + b.
 */
@@ -43,31 +46,65 @@ float scalar_product(const struct vector2 *a, const struct vector2 *b)
     return a->x * b->x + a->y * b->y;
 }
 
+float cross_product(const struct vector2 *a, const struct vector2 *b)
+{
+    return a->x*b->y - a->y*b->x;
+}
+
 /**
- * @brief Return in radian the angle between a and b.
+ * @brief Return in radian the angle to direct from a to b.
  * @details Return the radian angle that the robot must rotate by to be
- * directed according to b if it is currently directed according to a.  
+ * directed according to b if it is currently directed according to a.
+ * The angle is between -pi and pi.  
 */
 float angle(const struct vector2 *a, const struct vector2 *b)
 {
-    // TODO: check those calculus
-    return acos(scalar_product(a, b)/(vec__norm(a)*vec__norm(b)));
+    float angle = acos(scalar_product(a, b)/(vec__norm(a)*vec__norm(b)));
+    if (angle > M_PI)
+        angle = angle - 2*M_PI;
+    return (cross_product(a, b) > 0) ? angle : -angle;
+}
+
+/**
+ * @brief Return in radian the rotation for the robot to have the opposite final direction 
+ * @details Return ((rotation_angle + pi) % 2pi) - pi
+ * @param rotation_angle an angle between -pi and pi
+*/
+float opposite_angle(float rotation_angle)
+{
+    if (rotation_angle > 0)
+        return rotation_angle - M_PI;
+    return rotation_angle + M_PI;
+}
+
+void enqueueMove(float rotation_angle, const struct vector2 *nextMoveVec, int must_forward) {
+    // TODO: check if a null rotation has not to be enqueue
+    enqueueInstruction({ (rotation_angle > 0) ? TRIG_ROTATE: NON_TRIG_ROTATE,
+        (rotation_angle > 0) ? rotation_angle : -rotation_angle });
+    enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__norm(nextMoveVec)});
 }
 
 void schedulePath(const struct vector2 positions[], unsigned int position_number)
 {
-    // TODO: optimize the path by rotating the less and scheduling forward
-    // or backard moves according to the most quick rotation
     if (position_number < 2) return;
     struct vector2 currentPosition = positions[0];
     struct vector2 currentOrientation = vec__minus(positions + 1, positions);
     enqueueInstruction({ FORWARD, vec__norm(&currentOrientation)});
-    for (unsigned int i = 1; i < position_number; ++i) {
-        struct vector2 nextOrientation = vec__minus(positions + i, positions+i+1);
+    int should_forward = YES;
+    for (unsigned int i = 1; i < position_number - 1; ++i) {
+        struct vector2 nextOrientation = vec__minus(positions + i + 1, positions+i);
         float rotation = angle(&currentOrientation, &nextOrientation);
-        enqueueInstruction({ (rotation > 0) ? TRIG_ROTATE: NON_TRIG_ROTATE,
-        (rotation > 0) ? rotation : -rotation });
-        enqueueInstruction({ FORWARD, vec__norm(&currentOrientation)});
-        currentOrientation = nextOrientation;
+        if (abs(rotation) > M_PI_2) {
+            rotation = opposite_angle(rotation);
+            should_forward = NO;
+        } else {
+            should_forward = YES;
+        }
+        enqueueMove(rotation, &nextOrientation, should_forward);
+        currentOrientation = should_forward ? nextOrientation : vec__opposite(&nextOrientation);
     }
+    // force good orientation for the final position
+    struct vector2 finalOrientation = vec__minus(positions + position_number - 2, positions + position_number - 1); 
+    float lastRotation = angle(&currentOrientation, &finalOrientation);
+    enqueueMove(lastRotation, &finalOrientation, YES);
 }
