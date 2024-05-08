@@ -35,4 +35,10 @@ void pushInstruction(struct instruction instrct);
 */
 char isQueueEmpty();
 
+/**
+ * Display all the pending instructions, from the most prioritary
+ * one to the last.
+*/
+void displayQueue();
+
 #endif

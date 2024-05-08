@@ -1,5 +1,6 @@
 #include "task_queue.h"
 #include "instruction.h"
+#include "SPI.h"
 
 struct instruction queue[MAX_QUEUE_SIZE]; // TODO : dynamic size
 unsigned int tail_cursor = MAX_QUEUE_SIZE-1;
@@ -63,4 +64,15 @@ void pushInstruction(struct instruction instrct) {
             queue[head_cursor = 0] = instrct;
     } else
         raiseFullQueueError();
+}
+
+void displayQueue() {
+    if (isQueueEmpty())
+        Serial.println("<empty queue>");
+    int i = head_cursor;
+    int last_index = (tail_cursor > 0) ? tail_cursor-1 : MAX_QUEUE_SIZE-1;
+    while (i != last_index) {
+        Serial.printf("Type: '%c', Value: %f\n", queue[i].instruction_type, queue[i].value);
+        i = (i+1)%MAX_QUEUE_SIZE;
+    }
 }
