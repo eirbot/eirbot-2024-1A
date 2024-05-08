@@ -1,14 +1,21 @@
 #include "embedded_strategy.h"
 #include "task_queue.h"
 #include "Arduino.h"
+#include "variables.h"
 
+#define delayI 0.4
 
 void allerRetour(float distance){
     // enqueueInstruction({'p', 0});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', delayI});
+    // enqueueInstruction({'l', 4.0*3.14/180});
+    enqueueInstruction({'w', delayI});
     enqueueInstruction({'f', distance});
-    enqueueInstruction({'w', 0.5});
+    // enqueueInstruction({'w', delayI});
+    // enqueueInstruction({'r', 4.0*3.14/180});
+    // enqueueInstruction({'w', 0.5});
     // enqueueInstruction({'p', 90});
+    enqueueInstruction({'w', delayI});
     enqueueInstruction({'b', distance});
 }
 
@@ -65,17 +72,21 @@ void ramenerLesPots(){
     enqueueInstruction({'e', 0});
 }
 
-void stratYellow(){
-    enqueueInstruction({'f', 160});
-    enqueueInstruction({'p', 30});
-    enqueueInstruction({'b', 160});
-    enqueueInstruction({'p', 90});
-    enqueueInstruction({'f', 160});
-    enqueueInstruction({'r', 3.14/2});
+void stratBlue(){
+    enqueueInstruction({'f', 80});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'b', 80});
+    enqueueInstruction({'p', 100});
+    enqueueInstruction({'f', 120});
+    enqueueInstruction({'l', 3.14/2});
     enqueueInstruction({'f', 37});
     enqueueInstruction({'r', 95*3.14/180});
-    enqueueInstruction({'f', 160});
+    enqueueInstruction({'f', 120});
     enqueueInstruction({'e', 0});
+}
+
+void stratYellow(){
+    allerRetour(70);
 }
 
 void bonjour(){
@@ -83,7 +94,7 @@ void bonjour(){
     enqueueInstruction({'p', 90});
 }
 
-void laDanseDuRobot(){
+void droiteGauche(){
     enqueueInstruction({'r', 3.14/2});
     enqueueInstruction({'w', 1});
     enqueueInstruction({'l', 3.14});
@@ -96,6 +107,14 @@ void inspectEnvironmentAndComputeNewStrategy()
 {
     //TODO: enqueue a cyclic instruction
     // enqueueInstruction({'a', 0});   
-    carre();
-    // allerRetour(60);
+    // carre();
+    // allerRetour(110);
+    // droiteGauche();
+
+    if(checkVar(team) == blue){
+        stratBlue();
+    }
+    else if(checkVar(team) == yellow){
+        stratYellow();
+    }
 };

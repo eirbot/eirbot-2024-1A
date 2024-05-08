@@ -111,6 +111,10 @@ void oled_setup() {
   
 }
 
+void oledRefresh(){
+  ecranOLED.clearDisplay();
+}
+
 void oledPrintln(const char* message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
