@@ -23,7 +23,7 @@ void set_wheels_rotation_from_distance(float distance, struct wheel_step_data *l
 {
     if (distance) {
         float rotation = distance/WHEEL_RADIUS;
-        left_wheel_step_data->step_number = (rotation>=0)?(STEPS_BY_RAD*rotation*0.83):(-STEPS_BY_RAD*rotation*0.83);
+        left_wheel_step_data->step_number = (rotation>=0)?(STEPS_BY_RAD*rotation*0.93):(-STEPS_BY_RAD*rotation*0.93);
         left_wheel_step_data->direction = (rotation>=0);
         *right_wheel_step_data = *left_wheel_step_data;
     } else {

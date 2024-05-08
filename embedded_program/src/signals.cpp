@@ -19,7 +19,7 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    if(checkVar(instruct) != 'w'){
+    if(checkVar(instruct) != 'w' && checkVar(instruct) != 'p'){
         float distance;
         for(int i=1; i<4; i++){
             if (checkVar(forward)){

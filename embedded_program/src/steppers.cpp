@@ -116,7 +116,7 @@ void setServo(char angle){
 
 void avancer(unsigned int pas){
     motors[1]->move(StepperMotor::BWD, pas);
-    delay(24);
+    delay(30);
     motors[0]->move(StepperMotor::BWD, pas);
 
     // x_nucleo_ihm02a1->perform_prepared_actions();
@@ -131,7 +131,7 @@ void avancerVit(){
 
 void reculer(unsigned int pas){
     motors[1]->move(StepperMotor::FWD, pas);
-    delay(21);
+    delay(26);
     motors[0]->move(StepperMotor::FWD, pas);
 
     // x_nucleo_ihm02a1->perform_prepared_actions();
@@ -183,7 +183,7 @@ void hardStop(){
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void setSpeed(int stepPerSec){
+void setVit(int stepPerSec){
     if(stepPerSec >= 0){
         motors[0]->prepare_run(StepperMotor::BWD, stepPerSec);
         motors[1]->prepare_run(StepperMotor::BWD, stepPerSec);
@@ -194,6 +194,11 @@ void setSpeed(int stepPerSec){
     }
 
     x_nucleo_ihm02a1->perform_prepared_actions();
+}
+
+void setSpeed(int stepPerSec){
+    motors[0]->set_max_speed(stepPerSec);
+    motors[1]->set_max_speed(stepPerSec);
 }
 
 char motor_free(){

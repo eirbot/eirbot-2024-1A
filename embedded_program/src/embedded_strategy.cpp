@@ -74,25 +74,27 @@ void ramenerLesPots(){
 }
 
 void stratBlue(){
-    enqueueInstruction({'f', 80});
+    enqueueInstruction({'f', 170});
     enqueueInstruction({'p', 7});
-    enqueueInstruction({'b', 80});
-    enqueueInstruction({'p', 100});
-    enqueueInstruction({'f', 120});
-    enqueueInstruction({'l', 3.14/2});
-    enqueueInstruction({'f', 37});
-    enqueueInstruction({'r', 95*3.14/180});
-    enqueueInstruction({'f', 120});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'b', 170});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'f', 135});
+    enqueueInstruction({'l', 2.05});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
     enqueueInstruction({'e', 0});
 }
 
 void stratYellow(){
-    allerRetour(70);
+    allerRetour(170);
 }
 
 void bonjour(){
-    enqueueInstruction({'p', 0});
-    enqueueInstruction({'p', 90});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'p', 105});
 }
 
 void droiteGauche(){
@@ -103,6 +105,14 @@ void droiteGauche(){
     enqueueInstruction({'r', 3.14/2});
     enqueueInstruction({'w', 1});
 }
+
+void panneaux_solaires_bleus(){
+    enqueueInstruction({'f', 80});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'b', 80});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'e', 0});
+} 
 
 #define SOLAR_PANEL_AXIS 1752
 
@@ -185,12 +195,14 @@ void inspectEnvironmentAndComputeNewStrategy()
     // allerRetour(110);
     // droiteGauche();
 
-    // if(checkVar(team) == blue){
-    //     stratBlue();
-    // }
-    // else if(checkVar(team) == yellow){
-    //     stratYellow();
-    // }
+    if(checkVar(team) == blue){
+        stratBlue();
+    }
+    else if(checkVar(team) == yellow){
+        stratYellow();
+    }
+
+    // panneaux_solaires_bleus();
     
-    staticPath();
+    // staticPath();
 };

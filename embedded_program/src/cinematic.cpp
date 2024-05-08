@@ -88,7 +88,7 @@ void enqueueMove(float rotation_angle, const struct vector2 *nextMoveVec, int mu
     // TODO: check if a null rotation has not to be enqueue
     enqueueInstruction({ (rotation_angle > 0) ? TRIG_ROTATE: NON_TRIG_ROTATE,
         (rotation_angle > 0) ? rotation_angle : -rotation_angle });
-    enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__norm(nextMoveVec)});
+    enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__norm(nextMoveVec)/10});
 }
 
 float schedule_path(float currentOrientation, const struct vector2 positions[], unsigned int position_number)

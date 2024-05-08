@@ -274,7 +274,7 @@ void interface(){
             // while(!motor_free);
         }
         else{
-            setServo(100);
+            setServo(105);
         }
 
         oledBlink(20);
