@@ -8,5 +8,6 @@ void oledPrintln(const float message, int ligne, int colonne);
 void oledPrintln(const char message, int ligne, int colonne);
 void oled_setup();
 void oledBlink(int ligne);
+void oledRefresh();
 
 #endif

@@ -16,9 +16,12 @@ float readUltrasonic(char FwdBwd, char LRM){
             break;
         }
         case 2:{
-            trigPin = trigPinR;
-            echoPinF = echoPinFR;
-            echoPinB = echoPinBR;
+            // trigPin = trigPinR;
+            // echoPinF = echoPinFR;
+            // echoPinB = echoPinBR;
+            trigPin = trigPinM;
+            echoPinF = echoPinFM;
+            echoPinB = echoPinBM;
             break;
         }
         case 3:{
@@ -40,7 +43,7 @@ float readUltrasonic(char FwdBwd, char LRM){
 
     if (FwdBwd=='f') duration = pulseIn(echoPinF, HIGH);
     if (FwdBwd=='b') duration = pulseIn(echoPinB, HIGH);
-    printingInt(duration);
+    // printingInt(duration);
     distance = (float) duration * 0.034 / 2.0;
     return distance;
 }

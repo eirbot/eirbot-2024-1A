@@ -3,11 +3,28 @@ struct vector2 {
 };
 
 /**
+ * @brief Return in radian the rotation for the robot to have the opposite final direction 
+ * @details Return ((rotation_angle + pi) % 2pi) - pi
+ * @param rotation_angle an angle between -pi and pi
+*/
+float opposite_angle(float rotation_angle);
+
+/**
+ * @brief Return in radian the angle to direct from a to b.
+ * @param a the current direction vector in euclidian coordinate system
+ * @param b the next dirction vector in euclidian coordinate system
+ * @return the radian angle that the robot must rotate by to be
+ * directed according to b if it is currently directed according to a.
+ * The angle is between -pi and pi.  
+*/
+float angle(const struct vector2 *a, const struct vector2 *b);
+
+
+/**
  * @brief Enqueue instructions for the robot to pass by each of the given positions.
- * @details It is assumed that the robot is already relevantly orientated to reach the first
- * position after its start one. Afterwards, the robots move forward or backward in order to 
- * minimize the rotations. The final position is nevertheless reacht with a forced forward move,
- * so the robot is finally well-orientated.
+ * @details The robots move forward or backward in order to minimize the rotations. The
+ * final position is nevertheless reacht with a forced forward move, so the robot is
+ * finally well-orientated.
  * 
  * @param currentOrientation an angle in radian between -pi and pi giving the angle of the robot
  * according to the direction orientated on the right.
@@ -16,7 +33,7 @@ struct vector2 {
  * 
  * @return the final valued orientation of the robot
  * 
- * @def the coordinate system of the table is defined with a blue zone on the top left-hand corner
- * and the pami zone on the top. x growing => right, y growing => bottom
+ * @def the coordinate system of the table is the euclidian one, with the blue zone on the solar
+ * panels' side at the origin. x growing => right, y growing => top
 */
 float schedule_path(float currentOrientation, const struct vector2 positions[], unsigned int position_number);

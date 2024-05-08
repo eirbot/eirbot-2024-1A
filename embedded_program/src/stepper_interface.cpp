@@ -251,6 +251,7 @@ void interface(){
             }
         }
         else{
+            oledRefresh();
             float distance = readUltrasonic(checkVar(forward)? 'f' : 'b', LRM);
             oledPrintln(distance, 30, 0);
             oledPrintln((float) LRM, 45, 0);
@@ -263,8 +264,17 @@ void interface(){
         }        
 
         if(digitalRead(BTN4)){
-            while(digitalRead(BTN4));
-            avancer(50000);
+            setServo(7);
+            // while(digitalRead(BTN4));
+            // struct wheel_step_data pas;
+            // set_wheels_rotation_from_distance(50, &pas, &pas);
+            // avancer(pas.step_number);
+            // while(!motor_free);
+            // reculer(pas.step_number);
+            // while(!motor_free);
+        }
+        else{
+            setServo(100);
         }
 
         oledBlink(20);

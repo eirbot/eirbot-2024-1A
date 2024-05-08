@@ -19,34 +19,36 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    float distance;
-    for(int i=1; i<4; i++){
-        if (checkVar(forward)){
-            distance = readUltrasonic('f', i);
+    if(checkVar(instruct) != 'w'){
+        float distance;
+        for(int i=1; i<4; i++){
+            if (checkVar(forward)){
+                distance = readUltrasonic('f', i);
+            }
+            else{
+                distance = readUltrasonic('b', i);
+            } 
+            // int posL = motorPos(left);
+            // int posR = motorPos(right);
+
+            // int par = motorPar(left);
+
+            // printingFloat(distance);
+
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                unsigned int remainingSteps = abortRunningTask();
+                pushInstruction({switchInstuct((char) checkVar(instruct)), (float) remainingSteps});
+                pushInstruction({'w', 1.0});
+                break;
+            }
+
+            // oledPrintln((char) checkVar(instruct), 15, 0);
+            oledPrintln(distance, 15*i + 15, 0);
+            // oledPrintln(posR, 45, 0);
+            // oledPrintln(posL, 60, 0);
+            // oledPrintln(par, 15, 64);
+            
         }
-        else{
-            distance = readUltrasonic('b', i);
-        } 
-        // int posL = motorPos(left);
-        // int posR = motorPos(right);
-
-        // int par = motorPar(left);
-
-        // printingFloat(distance);
-
-        if (distance < 30 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
-            unsigned int remainingSteps = abortRunningTask();
-            pushInstruction({switchInstuct((char) checkVar(instruct)), (float) remainingSteps});
-            pushInstruction({'w', 1.0});
-            break;
-        }
-
-        // oledPrintln((char) checkVar(instruct), 15, 0);
-        oledPrintln(distance, 15*i + 15, 0);
-        // oledPrintln(posR, 45, 0);
-        // oledPrintln(posL, 60, 0);
-        // oledPrintln(par, 15, 64);
-        
     }
 }
 
