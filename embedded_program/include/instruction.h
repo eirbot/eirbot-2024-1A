@@ -5,6 +5,7 @@
 #define BACKWARD 'b'
 #define NON_TRIG_ROTATE 'r'
 #define TRIG_ROTATE 'l'
+#define ROTATE_ARM 'p'
 #define WAIT 'w'
 #define CHANGE_SPEED 's'
 
@@ -19,6 +20,7 @@
  * - 'b': rectilign backward movement (distance in cm)
  * - 'r': static non-trigo rotation (angle in rad)
  * - 'l': static trigo rotation (angle in rad)
+ * - 'p': arm rotation (angle in degree between 10° and 100°)
  * - 'w': wait (time in seconds)
  * - 's': set speed in step per second
  * - '1': rectilign forward movement (in step number)

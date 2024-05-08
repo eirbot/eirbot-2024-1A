@@ -95,6 +95,13 @@ void laDanseDuRobot(){
 
 #define SOLAR_PANEL_AXIS 1752
 
+#define ARM_UP enqueueInstruction({ROTATE_ARM, 10})
+#define ARM_DOWN enqueueInstruction({ROTATE_ARM, 90})
+
+/**
+ * The robot is expected to be on the correct bottom left/right-hand
+ * corner, looking to the right side of the table.
+ */
 void staticPath()
 {
     // TODO: adapt for blue team
@@ -112,13 +119,13 @@ void staticPath()
         to_right = {TRIG_ROTATE, -currentOrientation};
     enqueueInstruction(to_right);
 
-    // TODO: arm down
+    ARM_DOWN;
 
     path[0] = {1163, SOLAR_PANEL_AXIS};
     path[1] = {1790, SOLAR_PANEL_AXIS};
     currentOrientation = schedule_path(0, path, 2);
 
-    // TODO: arm up
+    ARM_UP;
     // 3 solar panels turned
 
     path[0] = {1790, SOLAR_PANEL_AXIS};
@@ -126,13 +133,13 @@ void staticPath()
     path[2] = {2155, SOLAR_PANEL_AXIS};
     currentOrientation = schedule_path(currentOrientation, path, 3);
 
-    // TODO: arm down
+    ARM_DOWN;
 
     path[0] = {2155, SOLAR_PANEL_AXIS};
     path[1] = {2825, SOLAR_PANEL_AXIS};
     currentOrientation = schedule_path(currentOrientation, path, 2);
     
-    // TODO: arm up
+    ARM_UP;
 
     // 6 plants in zone
     path[0] = {2825, SOLAR_PANEL_AXIS};
