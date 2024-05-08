@@ -119,10 +119,9 @@ void staticPath()
     // 3 solar panels turned 
     struct vector2 path[4] = {
         {2725, SOLAR_PANEL_AXIS},
-        {2000, 1615},
         {1163, SOLAR_PANEL_AXIS}
     };
-    float currentOrientation = schedule_path(0, path, 3);
+    float currentOrientation = schedule_path(0, path, 2);
 
     // rotate to right
     struct instruction to_right = {NON_TRIG_ROTATE, currentOrientation};
