@@ -1,9 +1,13 @@
 #include <Arduino.h>
 #include "TickTwo.h"
 
-const int PinEnableMg   = 5;                   
+const int PinEnableMg   = 4;                   
 const int PinIn1Mg      = 19; 
-const int PinIn2Mg      = 18; 
+const int PinIn2Mg      = 21; 
+
+const int PinEnableMd   = 2;                   
+const int PinIn3Md      = 5; 
+const int PinIn4Md      = 18; 
 
 uint32_t  intervalTemp  = 100; //ms
 uint32_t  Time_Trapeze  = 0;
@@ -38,8 +42,11 @@ void setup() {
   pinMode(PinEnableMg, OUTPUT);
   pinMode(PinIn1Mg, OUTPUT);
   pinMode(PinIn2Mg, OUTPUT);
+  pinMode(PinEnableMd, OUTPUT);
+  pinMode(PinIn3Md, OUTPUT);
+  pinMode(PinIn4Md, OUTPUT);
 
-    flag.Running = false;
+  flag.Running = false;
   flag.enable_ticker = true;
   Serial.begin(9600);
   motor.start();
@@ -48,6 +55,7 @@ void setup() {
 }
 
 void loop() {
+  Serial.printf("%d value \n", Value);
   ticker.update();
   motor.update();
   strat.update();
@@ -93,12 +101,19 @@ void motor_fonction()
         analogWrite(PinEnableMg, Value);
         digitalWrite(PinIn1Mg, HIGH);
         digitalWrite(PinIn2Mg, LOW);
+
+        analogWrite(PinEnableMd, Value);
+        digitalWrite(PinIn3Md, HIGH);
+        digitalWrite(PinIn4Md, LOW);
       }
       else{
         analogWrite(PinEnableMg, Value);
         digitalWrite(PinIn1Mg, LOW);
         digitalWrite(PinIn2Mg, HIGH);
 
+        analogWrite(PinEnableMd, Value);
+        digitalWrite(PinIn3Md, LOW);
+        digitalWrite(PinIn4Md, HIGH);
       }
     }      
     else if (not flag.avancer)
@@ -107,13 +122,19 @@ void motor_fonction()
         analogWrite(PinEnableMg, Value);
         digitalWrite(PinIn1Mg, HIGH);
         digitalWrite(PinIn2Mg, LOW);
-      
+
+        analogWrite(PinEnableMd, Value);
+        digitalWrite(PinIn3Md, LOW);
+        digitalWrite(PinIn4Md, HIGH);      
       }
       else {
         analogWrite(PinEnableMg, Value);
         digitalWrite(PinIn1Mg, LOW);
         digitalWrite(PinIn2Mg, HIGH);
 
+        analogWrite(PinEnableMd, Value);
+        digitalWrite(PinIn3Md, HIGH);
+        digitalWrite(PinIn4Md, LOW);
       }
       
     }
