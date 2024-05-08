@@ -11,7 +11,7 @@ struct vector2 {
  * 
  * @param currentOrientation an angle in radian between -pi and pi giving the angle of the robot
  * according to the direction orientated on the right.
- * @param positions An array of positions, assuming the robot to be already in the first one.
+ * @param positions An array of positions (mm), assuming the robot to be already in the first one.
  * @param position_number the number of given positions in the array. 
  * 
  * @return the final valued orientation of the robot

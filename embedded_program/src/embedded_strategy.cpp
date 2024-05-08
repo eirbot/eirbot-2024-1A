@@ -93,10 +93,11 @@ void laDanseDuRobot(){
     enqueueInstruction({'w', 1});
 }
 
+#define START_POSITION {135.70, 2000-90.554}
 #define SOLAR_PANEL_AXIS 1752
 
-#define ARM_UP enqueueInstruction({ROTATE_ARM, 10})
-#define ARM_DOWN enqueueInstruction({ROTATE_ARM, 90})
+#define ARM_UP enqueueInstruction({ROTATE_ARM, 100})
+#define ARM_DOWN enqueueInstruction({ROTATE_ARM, 7})
 
 /**
  * The robot is expected to be on the correct bottom left/right-hand
@@ -107,11 +108,13 @@ void staticPath()
     // TODO: adapt for blue team
     // 3 solar panels turned 
     struct vector2 path[4] = {
+        START_POSITION,
         {2725, SOLAR_PANEL_AXIS},
-        {2000, 1615},
-        {1163, SOLAR_PANEL_AXIS}
     };
-    float currentOrientation = schedule_path(0, path, 3);
+    float currentOrientation = schedule_path(0, path, 2);
+    path[0] = {2725, SOLAR_PANEL_AXIS};
+    path[1] = {2000, 1615};
+    path[2] = {1163, SOLAR_PANEL_AXIS};
 
     // rotate to right
     struct instruction to_right = {NON_TRIG_ROTATE, currentOrientation};
