@@ -3,15 +3,15 @@
 
 // #define EMERGENCY_PIN D7
 #define trigPinM PH1
-#define trigPinR PC15
+#define trigPinR PA0
 #define trigPinL PC13
 
 #define echoPinFM PH0
-#define echoPinFR PC14
+#define echoPinFR PA1
 #define echoPinFL PA14
 
 #define echoPinBM PA13
-#define echoPinBR PD2
+#define echoPinBR PC8
 #define echoPinBL PC11
 
 #define tirettePin PC5

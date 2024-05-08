@@ -133,6 +133,13 @@ void oledPrintln(const int message, int ligne, int colonne){
   ecranOLED.display();
 }
 
+void oledPrint(const int message, int ligne, int colonne){
+  // ecranOLED.clearDisplay();
+  ecranOLED.setCursor(colonne,ligne);
+  ecranOLED.print(message);
+  ecranOLED.display();
+}
+
 void oledPrintln(const unsigned int message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
@@ -158,6 +165,14 @@ void oledPrintln(const char message, int ligne, int colonne){
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
+}
+
+void oledPrintScore(int score){
+  ecranOLED.setCursor(0, 60);
+  ecranOLED.setTextSize(5);
+  ecranOLED.println(score);
+  ecranOLED.display();
+  ecranOLED.setTextSize(1);
 }
 
 void oledBlink(int ligne){

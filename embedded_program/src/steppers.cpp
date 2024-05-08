@@ -114,9 +114,9 @@ void setServo(char angle){
     // for (int i=0; i<)
 }
 
-void avancer(unsigned int pas){
+void avancer(unsigned int pas, int d){
     motors[1]->move(StepperMotor::BWD, pas);
-    delay(30);
+    delay(d);
     motors[0]->move(StepperMotor::BWD, pas);
 
     // x_nucleo_ihm02a1->perform_prepared_actions();
@@ -129,9 +129,9 @@ void avancerVit(){
     x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void reculer(unsigned int pas){
+void reculer(unsigned int pas, int d){
     motors[1]->move(StepperMotor::FWD, pas);
-    delay(26);
+    delay(d);
     motors[0]->move(StepperMotor::FWD, pas);
 
     // x_nucleo_ihm02a1->perform_prepared_actions();
