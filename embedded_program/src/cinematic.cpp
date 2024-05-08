@@ -5,6 +5,13 @@
 
 #define YES 1
 #define NO 0
+#define TABLE_HEIGHT 2000
+
+struct vector2 RIGHT = {1, 0};
+
+struct vector2 to_euclidian(const struct vector2 *a) {
+    return {a->x, TABLE_HEIGHT - a->y};
+}
 
 /**
  * @brief Return a + b.
@@ -84,16 +91,17 @@ void enqueueMove(float rotation_angle, const struct vector2 *nextMoveVec, int mu
     enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__norm(nextMoveVec)});
 }
 
-void schedulePath(const struct vector2 positions[], unsigned int position_number)
+float schedule_path(float currentOrientation, const struct vector2 positions[], unsigned int position_number)
 {
-    if (position_number < 2) return;
-    struct vector2 currentPosition = positions[0];
-    struct vector2 currentOrientation = vec__minus(positions + 1, positions);
-    enqueueInstruction({ FORWARD, vec__norm(&currentOrientation)});
+    if (position_number < 2) return currentOrientation;
+    struct vector2 currentPosition = to_euclidian(positions);
+    struct vector2 currentOrientationVec = {cos(currentOrientation), sin(currentOrientation)};
     int should_forward = YES;
-    for (unsigned int i = 1; i < position_number - 1; ++i) {
-        struct vector2 nextOrientation = vec__minus(positions + i + 1, positions+i);
-        float rotation = angle(&currentOrientation, &nextOrientation);
+    for (unsigned int i = 0; i < position_number - 2; ++i) {
+        currentPosition = to_euclidian(positions + i);
+        struct vector2 nextPosition = to_euclidian(positions + i + 1);
+        struct vector2 nextOrientation = vec__minus(&nextPosition, &currentPosition);
+        float rotation = angle(&currentOrientationVec, &nextOrientation);
         if (abs(rotation) > M_PI_2) {
             rotation = opposite_angle(rotation);
             should_forward = NO;
@@ -101,10 +109,11 @@ void schedulePath(const struct vector2 positions[], unsigned int position_number
             should_forward = YES;
         }
         enqueueMove(rotation, &nextOrientation, should_forward);
-        currentOrientation = should_forward ? nextOrientation : vec__opposite(&nextOrientation);
+        currentOrientationVec = should_forward ? nextOrientation : vec__opposite(&nextOrientation);
     }
     // force good orientation for the final position
-    struct vector2 finalOrientation = vec__minus(positions + position_number - 2, positions + position_number - 1); 
-    float lastRotation = angle(&currentOrientation, &finalOrientation);
-    enqueueMove(lastRotation, &finalOrientation, YES);
+    struct vector2 finalOrientationVec = vec__minus(positions + position_number - 1, positions + position_number - 2); 
+    float lastRotation = angle(&currentOrientationVec, &finalOrientationVec);
+    enqueueMove(lastRotation, &finalOrientationVec, YES);
+    return angle(&RIGHT, &finalOrientationVec);
 }

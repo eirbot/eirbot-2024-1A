@@ -1,0 +1,35 @@
+// En bas à droite, orienté vers la droite
+// ancrage choisi: milieu entre barreau gauche et bras
+// si ancrage := milieu entre barre gauche et barre droite, alors augmenter 1752 pour aller un peu plus bas
+{2725, 1752}
+{2000, 1615}
+{1163, 1752}
+
+// s'orienter à droite
+// Abaisser le bras
+{1163, 1752}
+{1790, 1752}
+// Relever le bras
+{1790, 1752}
+{2000, 1685}
+{2155, 1752}
+// Abaisser le bras
+{2155, 1752}
+{2825, 1752}
+// Relever le bras
+{2825, 1752}
+{1810, 1600}
+{2700, 260} // Forcer la direction
+
+{2700, 260}
+{2531, 490}
+{1860, 340}
+{400, 950}
+
+{400, 950} 
+{570, 900}
+{660, 1200}
+{2000, 1685} // Forcer la direction
+
+{2000, 1685}
+{2725, 1752} // Retour à la case départ
