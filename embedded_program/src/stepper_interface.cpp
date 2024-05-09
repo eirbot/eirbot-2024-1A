@@ -534,6 +534,9 @@ int interface(){
             oledPrintln(checkVar(team)? "equ jaune" : "equ bleue",15, 0);
             
             if(!digitalRead(BTN3)){
+                oledSquare(30, on);
+                oledSquare(60, off);
+
                 if(!digitalRead(BTNC)){
                     while(!digitalRead(BTNC));
 
@@ -546,6 +549,9 @@ int interface(){
                 }
             }
             else {
+                oledSquare(30, off);
+                oledSquare(60, on);
+
                 if(!digitalRead(BTNC)){
                     while(!digitalRead(BTNC));
 

@@ -178,3 +178,7 @@ void oledPrintScore(int score){
 void oledBlink(int ligne){
   ecranOLED.fillRect(120, ligne, 5, 5, INVERSE);
 }
+
+void oledSquare(int ligne, char etat){
+  ecranOLED.fillRect(120, ligne, 5, 5, etat);
+}

@@ -106,7 +106,7 @@ void board_setup()
     motors = x_nucleo_ihm02a1->get_components();
 
     servo.attach(servoPin);
-    servo.write(90);
+    servo.write(105);
 }
 
 void setServo(char angle){
