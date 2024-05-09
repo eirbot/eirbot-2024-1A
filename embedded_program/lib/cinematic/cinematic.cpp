@@ -35,10 +35,7 @@ struct vector2 vec__minus(const struct vector2 *a, const struct vector2 *b)
     return vec__add(a, &opposite);
 }
 
-/**
- * @brief Return the 2-norm of a.
-*/
-float vec__norm(const struct vector2 *a)
+float vec__magnitude(const struct vector2 *a)
 {
     int x = a->x;
     int y = a->y;
@@ -57,7 +54,7 @@ float cross_product(const struct vector2 *a, const struct vector2 *b)
 
 float angle(const struct vector2 *a, const struct vector2 *b)
 {
-    float angle = acosf(fmaxf(-1, fminf(1, scalar_product(a, b)/(vec__norm(a)*vec__norm(b))))); 
+    float angle = acosf(fmaxf(-1, fminf(1, scalar_product(a, b)/(vec__magnitude(a)*vec__magnitude(b))))); 
     return (cross_product(a, b) > 0) ? angle : -angle;
 }
 
@@ -82,7 +79,7 @@ void enqueueMove(float rotation_angle, const struct vector2 *nextMoveVec, int mu
     // TODO: check if a null rotation has not to be enqueue
     enqueueInstruction({ (rotation_angle > 0) ? TRIG_ROTATE: NON_TRIG_ROTATE,
         (rotation_angle > 0) ? rotation_angle : -rotation_angle });
-    enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__norm(nextMoveVec)/10});
+    enqueueInstruction({ must_forward ? FORWARD : BACKWARD, vec__magnitude(nextMoveVec)/10});
 }
 
 float schedule_path(float currentOrientation, const struct vector2 positions[], unsigned int position_number)

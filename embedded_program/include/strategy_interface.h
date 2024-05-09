@@ -3,10 +3,6 @@
 
 #include <instruction.h>
 
-#ifndef DANGER_ZONE_RADIUS
-#define DANGER_ZONE_RADIUS 17 
-#endif // DANGER_ZONE_RADIUS
-
 /**
  * @brief Check the sensors and return if the robot can execute the instruction
  * 

@@ -2,7 +2,8 @@
 #include "sensors.h"
 #include "printing.h"
 #include "pins.h"
-#include "task_queue.h"
+#include "constants.h"
+#include <task_queue.h>
 #include "variables.h"
 #include "oled_screen.h"
 #include "steppers.h"
@@ -35,9 +36,12 @@ void processExternalSignals()
 
             // printingFloat(distance);
 
-            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+            if (distance < DANGER_ZONE_RADIUS && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
 
                 unsigned int remainingSteps = abortRunningTask();
+                // TODO: uncomment that
+                // void avoid_other_bot(remainingSteps,
+                //                      int is_forward_move);
 
                 if(checkVar(instruct) == '7'){
                     clearQueue();

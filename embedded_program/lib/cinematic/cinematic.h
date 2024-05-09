@@ -16,6 +16,11 @@ struct vector2 vec__add(const struct vector2 *a, const struct vector2 *b);
 struct vector2 vec__minus(const struct vector2 *a, const struct vector2 *b);
 
 /**
+ * @brief Return the 2-magnitude of a.
+*/
+float vec__magnitude(const struct vector2 *a);
+
+/**
  * @brief Return norm*e^{i*argument}
  * @param argument an angle in [-pi; pi]
  * @param norm a positive real
