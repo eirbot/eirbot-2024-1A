@@ -1,7 +1,7 @@
 #ifndef __STRATEGY_INTERFACE_H__
 #define __STRATEGY_INTERFACE_H__
 
-#include "instruction.h"
+#include <instruction.h>
 
 #ifndef DANGER_ZONE_RADIUS
 #define DANGER_ZONE_RADIUS 17 
@@ -15,13 +15,13 @@
  * @param justDequeuedInstruction the instruction to be executed
  * @return 1 if the robot is able to execute the instruction, 0 else.
 */
-char canExecuteInstruction(struct instruction *justDequeuedInstruction);
+char canExecuteInstruction(const struct instruction *justDequeuedInstruction);
 
 /**
  * @brief Update the internal data for a minimal real-time strategy 
  * @param justDequeuedInstruction the instruction to be executed
 */
-void updateStrategicData(struct instruction *justDequeuedInstruction);
+void updateStrategicData(const struct instruction *justDequeuedInstruction);
 
 /**
  * @brief Enqueue and/or dequeue the good instructions to make a deviation avoiding

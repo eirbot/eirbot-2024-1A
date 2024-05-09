@@ -1,8 +1,7 @@
 #include <Arduino.h>
-#include "instruction.h"
+#include <task_queue.h>
 #include "stepper_interface.h"
 #include "strategy_interface.h"
-#include "task_queue.h"
 #include "signals.h"
 #include "printing.h"
 #include "oled_screen.h"

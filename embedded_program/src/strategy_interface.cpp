@@ -1,5 +1,4 @@
 #include "strategy_interface.h"
-#include "instruction.h"
 #include "embedded_strategy.h"
 #include "conversions.h"
 #include "sensors.h"
