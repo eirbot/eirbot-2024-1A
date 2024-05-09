@@ -10,6 +10,7 @@ void oledPrintln(const char message, int ligne, int colonne);
 void oledPrintScore(int score);
 void oled_setup();
 void oledBlink(int ligne);
+void oledSquare(int ligne, char etat);
 void oledRefresh();
 
 #endif

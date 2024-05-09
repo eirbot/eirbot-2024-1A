@@ -19,7 +19,7 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    if(checkVar(instruct) != 'w' && checkVar(instruct) != 'p'){
+    if(checkVar(instruct) != 'w' && checkVar(instruct) != 'p' && checkVar(capt) != off){
         float distance;
         for(int i=1; i<4; i++){
             if (checkVar(forward)){
@@ -35,13 +35,14 @@ void processExternalSignals()
 
             // printingFloat(distance);
 
-            if (distance < 23 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
 
                 unsigned int remainingSteps = abortRunningTask();
 
                 if(checkVar(instruct) == '7'){
                     clearQueue();
                     enqueueInstruction({'w', 1.0});
+                    enqueueInstruction({'r', 0.05});
                     enqueueInstruction({'p', 7});
                     enqueueInstruction({'s', 90});
                     // float calcul = (float) 170 - (remainingSteps/(200*128)) * (float) 2*3.63*3.14;
@@ -49,6 +50,7 @@ void processExternalSignals()
                     enqueueInstruction({'h', (float) 170 - (remainingSteps/(200*128)) * (float) (2*3.63*3.14*1.075)});
                     enqueueInstruction({'p', 105});
                     enqueueInstruction({'s', 300});
+                    // hacked by the bee
                     enqueueInstruction({'f', 125});
                     enqueueInstruction({'l', 2.15});
                     enqueueInstruction({'f', 190});
@@ -59,6 +61,7 @@ void processExternalSignals()
                 if(checkVar(instruct) == '8'){
                     clearQueue();
                     enqueueInstruction({'w', 1.0});
+                    enqueueInstruction({'r', 0.05});
                     enqueueInstruction({'p', 7});
                     enqueueInstruction({'s', 90});
                     enqueueInstruction({'g', (float) 185 - (remainingSteps/(200*128)) * (float) (2*3.63*3.14*1.075)});

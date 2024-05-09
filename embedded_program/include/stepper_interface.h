@@ -13,6 +13,6 @@ int abortRunningTask();
 
 char switchInstuct(char instructVal);
 
-void interface();
+int interface();
 
 #endif
