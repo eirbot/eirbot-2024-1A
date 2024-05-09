@@ -55,9 +55,7 @@ float cross_product(const struct vector2 *a, const struct vector2 *b)
 
 float angle(const struct vector2 *a, const struct vector2 *b)
 {
-    float angle = acos(scalar_product(a, b)/(vec__norm(a)*vec__norm(b)));
-    if (angle > M_PI)
-        angle = angle - 2*M_PI;
+    float angle = acosf(fmaxf(-1, fminf(1, scalar_product(a, b)/(vec__norm(a)*vec__norm(b))))); 
     return (cross_product(a, b) > 0) ? angle : -angle;
 }
 
@@ -86,7 +84,7 @@ float schedule_path(float currentOrientation, const struct vector2 positions[], 
         struct vector2 nextPosition = positions[i + 1];
         struct vector2 nextOrientation = vec__minus(&nextPosition, &currentPosition);
         float rotation = angle(&currentOrientationVec, &nextOrientation);
-        if (abs(rotation) > M_PI_2) {
+        if (fabsf(rotation) > M_PI_2) {
             rotation = opposite_angle(rotation);
             should_forward = NO;
         } else {

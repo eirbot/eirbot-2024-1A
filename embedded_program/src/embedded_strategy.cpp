@@ -105,32 +105,33 @@ void droiteGauche(){
 }
 
 // TODO: convert this coord correctly
-// #define START_POSITION {135.70, 2000-90.554}
-#define START_POSITION {3000-135.70, 2000-90.554}
-#define SOLAR_PANEL_AXIS 1752
+// #define START_POSITION {135.70, 200-9.0554}
+#define START_POSITION {300-13.570, 200-9.0554}
+#define SOLAR_PANEL_AXIS 200-175.2
 
 #define ARM_UP enqueueInstruction({ROTATE_ARM, 100})
 #define ARM_DOWN enqueueInstruction({ROTATE_ARM, 7})
 
 /**
  * The robot is expected to be on the correct bottom left/right-hand
- * corner, looking to the right side of the table.
+ * corner, looking to the right side of the table. He is yellow for now.
  */
 void staticPath()
 {
     // TODO: adapt for blue team
+    // TODO: everything in euclidian coordinates
     // 6 solar panels turned
     struct vector2 path[4] = {
         START_POSITION,
-        {1163, SOLAR_PANEL_AXIS},
+        {116.3, SOLAR_PANEL_AXIS},
     };
     float currentOrientation = schedule_path(0, path, 2);
 
     ARM_DOWN;
     // TODO: slow down for solar panels
 
-    path[0] = {1163, SOLAR_PANEL_AXIS};
-    path[1] = {2825, SOLAR_PANEL_AXIS};
+    path[0] = {116.3, SOLAR_PANEL_AXIS};
+    path[1] = {282.5, SOLAR_PANEL_AXIS};
     currentOrientation = schedule_path(currentOrientation, path, 2);
 
     ARM_UP;

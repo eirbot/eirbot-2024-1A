@@ -41,4 +41,4 @@ char isQueueEmpty();
 */
 void displayQueue();
 
-#endif
+#endif // __TASK_QUEUE_H__

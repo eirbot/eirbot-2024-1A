@@ -1,3 +1,6 @@
+#ifndef __CINEMATIC_H__
+#define __CINEMATIC_H__
+
 struct vector2 {
     float x, y;
 };
@@ -28,7 +31,7 @@ float angle(const struct vector2 *a, const struct vector2 *b);
  * 
  * @param currentOrientation an angle in radian between -pi and pi giving the angle of the robot
  * according to the direction orientated on the right.
- * @param positions An array of positions (mm), assuming the robot to be already in the first one.
+ * @param positions An array of positions (cm), assuming the robot to be already in the first one.
  * @param position_number the number of given positions in the array. 
  * 
  * @return the final valued orientation of the robot
@@ -37,3 +40,5 @@ float angle(const struct vector2 *a, const struct vector2 *b);
  * panels' side at the origin. x growing => right, y growing => top
 */
 float schedule_path(float currentOrientation, const struct vector2 positions[], unsigned int position_number);
+
+#endif // __CINEMATIC_H__

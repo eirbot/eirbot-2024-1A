@@ -1,9 +1,10 @@
+
+#include <Arduino.h>
 #include "instruction.h"
 #include "stepper_interface.h"
 #include "task_queue.h"
 #include "embedded_strategy.h"
 #include "signals.h"
-#include "Arduino.h"
 #include "printing.h"
 #include "oled_screen.h"
 
