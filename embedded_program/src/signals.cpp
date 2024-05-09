@@ -35,8 +35,42 @@ void processExternalSignals()
 
             // printingFloat(distance);
 
-            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+            if (distance < 23 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+
                 unsigned int remainingSteps = abortRunningTask();
+
+                if(checkVar(instruct) == '7'){
+                    clearQueue();
+                    enqueueInstruction({'w', 1.0});
+                    enqueueInstruction({'p', 7});
+                    enqueueInstruction({'s', 90});
+                    // float calcul = (float) 170 - (remainingSteps/(200*128)) * (float) 2*3.63*3.14;
+                    // printingFloat(calcul);
+                    enqueueInstruction({'h', (float) 170 - (remainingSteps/(200*128)) * (float) (2*3.63*3.14*1.075)});
+                    enqueueInstruction({'p', 105});
+                    enqueueInstruction({'s', 300});
+                    enqueueInstruction({'f', 125});
+                    enqueueInstruction({'l', 2.15});
+                    enqueueInstruction({'f', 190});
+                    enqueueInstruction({'e', 0});
+                    break;
+                }
+
+                if(checkVar(instruct) == '8'){
+                    clearQueue();
+                    enqueueInstruction({'w', 1.0});
+                    enqueueInstruction({'p', 7});
+                    enqueueInstruction({'s', 90});
+                    enqueueInstruction({'g', (float) 185 - (remainingSteps/(200*128)) * (float) (2*3.63*3.14*1.075)});
+                    enqueueInstruction({'p', 105});
+                    enqueueInstruction({'s', 300});
+                    enqueueInstruction({'b', 125});
+                    enqueueInstruction({'l', 3.14 - 2.2});
+                    enqueueInstruction({'f', 190});
+                    enqueueInstruction({'e', 0});
+                    break;
+                }
+
                 pushInstruction({switchInstuct((char) checkVar(instruct)), (float) remainingSteps});
                 pushInstruction({'w', 1.0});
                 break;
