@@ -6,6 +6,31 @@ struct vector2 {
 };
 
 /**
+ * @brief Return a + b.
+*/
+struct vector2 vec__add(const struct vector2 *a, const struct vector2 *b);
+
+/**
+ * @brief Return a - b.
+*/
+struct vector2 vec__minus(const struct vector2 *a, const struct vector2 *b);
+
+/**
+ * @brief Return norm*e^{i*argument}
+ * @param argument an angle in [-pi; pi]
+ * @param norm a positive real
+*/
+struct vector2 vec_from_arg(float argument, float norm);
+
+/**
+ * @brief Add two angles
+ * @param angle1 an angle in [-pi; pi]
+ * @param angle2 an angle in [-pi; pi]
+ * @return the total angle in [-pi; pi]
+*/
+float angle__add(float angle1, float angle2);
+
+/**
  * @brief Return in radian the rotation for the robot to have the opposite final direction 
  * @details Return ((rotation_angle + pi) % 2pi) - pi
  * @param rotation_angle an angle between -pi and pi

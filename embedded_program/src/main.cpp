@@ -2,7 +2,7 @@
 #include "instruction.h"
 #include "stepper_interface.h"
 #include "task_queue.h"
-#include "embedded_strategy.h"
+#include "strategy_interface.h"
 #include "signals.h"
 #include "printing.h"
 #include "oled_screen.h"
@@ -39,7 +39,9 @@ void scheduleNextInstruction()
 {
     if (isQueueEmpty())
         inspectEnvironmentAndComputeNewStrategy();
-    setMotorsSteps(dequeueInstruction());
+    struct dequeuedInstruction = dequeueInstruction();
+    updateStrategicData(dequeuedInstruction); 
+    setMotorsSteps(dequeuedInstruction);
 }
 
 const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals

@@ -16,6 +16,11 @@ struct vector2 vec__add(const struct vector2 *a, const struct vector2 *b)
     return {a->x + b->x, a->y + b->y};
 }
 
+vector2 vec_from_arg(float argument, float norm)
+{
+    return {norm*cosf(argument), norm*sinf(argument)};
+}
+
 /**
  * @brief Return -a.
 */
@@ -24,9 +29,6 @@ struct vector2 vec__opposite(const struct vector2 *a)
     return {-a->x, -a->y};
 }
 
-/**
- * @brief Return a - b.
-*/
 struct vector2 vec__minus(const struct vector2 *a, const struct vector2 *b)
 {
     struct vector2 opposite = vec__opposite(b);
@@ -57,6 +59,15 @@ float angle(const struct vector2 *a, const struct vector2 *b)
 {
     float angle = acosf(fmaxf(-1, fminf(1, scalar_product(a, b)/(vec__norm(a)*vec__norm(b))))); 
     return (cross_product(a, b) > 0) ? angle : -angle;
+}
+
+float angle__add(float angle1, float angle2)
+{
+    float new_rotation = angle1 + angle2;
+    if (new_rotation > M_PI)
+        return new_rotation - M_TWOPI;
+    if (new_rotation < -M_PI)
+        return new_rotation + M_TWOPI;
 }
 
 float opposite_angle(float rotation_angle)
