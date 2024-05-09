@@ -73,7 +73,8 @@ void ramenerLesPots(){
     enqueueInstruction({'e', 0});
 }
 
-void stratBlueFFFF(){
+void stratBlue6P(){
+    enqueueInstruction({'w', 10});
     enqueueInstruction({'f', 170});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
@@ -88,7 +89,23 @@ void stratBlueFFFF(){
     enqueueInstruction({'e', 0});
 }
 
-void stratBlue(){
+void stratBlue3P(){
+    enqueueInstruction({'f', 80});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'h', 80});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'f', 125});
+    enqueueInstruction({'l', 2.15});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
+void stratBlueReact(){
+    enqueueInstruction({'w', 10});
     enqueueInstruction({'7', 170});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
@@ -103,7 +120,8 @@ void stratBlue(){
     enqueueInstruction({'e', 0});
 }
 
-void stratYellowFFFF(){
+void stratYellow6P(){
+    enqueueInstruction({'w', 10});
     enqueueInstruction({'b', 185});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
@@ -118,7 +136,23 @@ void stratYellowFFFF(){
     enqueueInstruction({'e', 0});
 }
 
-void stratYellow(){
+void stratYellow3P(){
+    enqueueInstruction({'b', 90});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'g', 90});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'b', 125});
+    enqueueInstruction({'l', 3.14 - 2.2});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
+void stratYellowReact(){
+    enqueueInstruction({'w', 10});
     enqueueInstruction({'8', 185});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
@@ -236,13 +270,46 @@ void inspectEnvironmentAndComputeNewStrategy()
     // allerRetour(110);
     // droiteGauche();
 
-    if(checkVar(team) == blue){
-        if(checkVar(match)) stratBlueFFFF();
-        else stratBlue();
-    }
-    else if(checkVar(team) == yellow){
-        if(checkVar(match)) stratYellowFFFF();
-        else stratYellow();
+    // if(checkVar(team) == blue){
+    //     if(checkVar(match)) stratBlue3P();
+    //     else stratBlue();
+    // }
+    // else if(checkVar(team) == yellow){
+    //     if(checkVar(match)) stratYellow3P();
+    //     else stratYellow();
+    // }
+
+    switch(checkVar(match)){
+        case stratReact:
+            if(checkVar(team) == blue){
+                stratBlueReact();
+            }
+            else{
+                stratYellowReact();
+            }
+            break;
+
+            case strat6P:
+            if(checkVar(team) == blue){
+                stratBlue6P();
+            }
+            else{
+                stratYellow6P();
+            }
+            break;
+
+            case strat3P:
+            if(checkVar(team) == blue){
+                stratBlue3P();
+            }
+            else{
+                stratYellow3P();
+            }
+            break;
+
+        default:
+            break;
+
     }
 
     // panneaux_solaires_bleus();

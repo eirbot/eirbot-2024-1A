@@ -118,7 +118,7 @@ void oledRefresh(){
 void oledPrintln(const char* message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
-  ecranOLED.fillRect(colonne, ligne-12, 96, 13, BLACK);
+  ecranOLED.fillRect(colonne, ligne-12, 115, 13, BLACK);
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
@@ -127,7 +127,7 @@ void oledPrintln(const char* message, int ligne, int colonne){
 void oledPrintln(const int message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
-  ecranOLED.fillRect(colonne, ligne-12, 96, 13, BLACK);
+  ecranOLED.fillRect(colonne, ligne-12, 115, 13, BLACK);
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
@@ -143,7 +143,7 @@ void oledPrint(const int message, int ligne, int colonne){
 void oledPrintln(const unsigned int message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
-  ecranOLED.fillRect(colonne, ligne-12, 96, 13, BLACK);
+  ecranOLED.fillRect(colonne, ligne-12, 115, 13, BLACK);
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
@@ -152,7 +152,7 @@ void oledPrintln(const unsigned int message, int ligne, int colonne){
 void oledPrintln(const float message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
-  ecranOLED.fillRect(colonne, ligne-12, 96, 13, BLACK);
+  ecranOLED.fillRect(colonne, ligne-12, 115, 13, BLACK);
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
@@ -161,7 +161,7 @@ void oledPrintln(const float message, int ligne, int colonne){
 void oledPrintln(const char message, int ligne, int colonne){
   // ecranOLED.clearDisplay();
   ecranOLED.setCursor(colonne,ligne);
-  ecranOLED.fillRect(colonne, ligne-12, 96, 13, BLACK);
+  ecranOLED.fillRect(colonne, ligne-12, 115, 13, BLACK);
   ecranOLED.setCursor(colonne,ligne);
   ecranOLED.println(message);
   ecranOLED.display();
