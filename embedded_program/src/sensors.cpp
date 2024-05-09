@@ -16,12 +16,12 @@ float readUltrasonic(char FwdBwd, char LRM){
             break;
         }
         case 2:{
-            // trigPin = trigPinR;
-            // echoPinF = echoPinFR;
-            // echoPinB = echoPinBR;
-            trigPin = trigPinM;
-            echoPinF = echoPinFM;
-            echoPinB = echoPinBM;
+            trigPin = trigPinR;
+            echoPinF = echoPinFR;
+            echoPinB = echoPinBR;
+            // trigPin = trigPinM;
+            // echoPinF = echoPinFM;
+            // echoPinB = echoPinBM;
             break;
         }
         case 3:{

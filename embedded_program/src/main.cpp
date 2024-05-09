@@ -1,4 +1,3 @@
-
 #include <Arduino.h>
 #include "instruction.h"
 #include "stepper_interface.h"
@@ -60,6 +59,7 @@ void loop()
     if (t++ == DELTA_T) {
         t = 0;
         processOutsideSignals();
+        oledPrintScore(41);
     }
     if (isStepperFree()){
         scheduleNextInstruction();

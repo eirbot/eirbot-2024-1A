@@ -1,6 +1,8 @@
+#include <SPI.h>
+
 #include "task_queue.h"
 #include "instruction.h"
-#include "SPI.h"
+
 
 struct instruction queue[MAX_QUEUE_SIZE]; // TODO : dynamic size
 unsigned int tail_cursor = MAX_QUEUE_SIZE-1;
