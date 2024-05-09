@@ -14,8 +14,8 @@
 // #define d300 45
 // #define d90 150
 
-#define d300 50
-#define d90 150
+#define d300 38
+#define d90 90
 
 unsigned int remaining_time; // multiple of 0.2s
 // the expected total number of steps achieved by the left wheel after the current instruction
@@ -515,62 +515,132 @@ char switchInstuct(char instructVal){
     }
 }
 
-void interface(){
+int interface(){
     // char LRM = 1;
+    int score = 33;
+    char debugMode = 0;
+    char matchMode = 0;
+    float distance = 0;
     while(!digitalRead(tirettePin)){
 
-        if(digitalRead(BTN1) && checkVar(team) == blue){
-            changeVar(team, yellow);
-        }
-        if(!digitalRead(BTN1) && checkVar(team) == yellow){
-            changeVar(team, blue);
+        if(!digitalRead(BTN4)){             // match mode
+            if(digitalRead(BTN1) && checkVar(team) == blue){
+                changeVar(team, yellow);
+            }
+            if(!digitalRead(BTN1) && checkVar(team) == yellow){
+                changeVar(team, blue);
+            }
+
+            oledPrintln(checkVar(team)? "equ jaune" : "equ bleue",15, 0);
+            
+            if(!digitalRead(BTN3)){
+                oledSquare(30, on);
+                oledSquare(60, off);
+
+                if(!digitalRead(BTNC)){
+                    while(!digitalRead(BTNC));
+
+                    char matchVal = checkVar(match);
+
+                    if(matchVal >= 3) changeVar(match, 1);
+                    else changeVar(match, checkVar(match) + 1);
+
+                    oledPrintln(" ", 30, 0);
+                }
+            }
+            else {
+                oledSquare(30, off);
+                oledSquare(60, on);
+
+                if(!digitalRead(BTNC)){
+                    while(!digitalRead(BTNC));
+
+                    score ++;
+
+                    if(score >= 52) score = 15;
+                    oledPrintln(" ", 60, 0);
+                }
+            }
+
+            switch(checkVar(match)){
+                case stratReact:
+                    oledPrintln("strat react",30, 0);
+                    break;
+                case strat6P:
+                    oledPrintln("strat 6 p",30, 0);
+                    break;
+                case strat3P:
+                    oledPrintln("strat 3 p",30, 0);
+                    break;
+                default:
+                    oledPrintln("wrong strat",30, 0);
+                    break;
+            }
+
+            if(digitalRead(BTN2) && checkVar(capt) == off){
+                changeVar(capt, on);
+            }
+            if(!digitalRead(BTN2) && checkVar(capt) == on){
+                changeVar(capt, off);
+            }
+
+            oledPrintln(checkVar(capt)? "capt on" : "capt off", 45, 0);
+
+            // if(digitalRead(BTN3)){
+            //     changeVar(match, 0);
+            //     float distance;
+            //     for(int i=1; i<4; i++){
+            //         distance = readUltrasonic(checkVar(forward)? 'f' : 'b', i);
+            //         oledPrintln(distance, 15*i + 15, 0);
+            //     }
+            // }
+            // else{
+            //     changeVar(match, 1);
+            // }
+            // oledPrintln(checkVar(match)? "match" : "practice", 30, 0);
+
+            oledPrintln("score ", 60, 0);
+            oledPrint(score, 60, 60);
+            oledBlink(5);
         }
 
-        oledPrintln(checkVar(team)? "equ jaune" : "equ bleue",15, 0);
+        else{               // debugMode
+            oledPrintln("debug mode", 15, 0);
 
-        if(!digitalRead(BTN2) && checkVar(forward)) {
-            changeVar(forward, 0);
-            oledBlink(50);
-        }
-        if(digitalRead(BTN2) && !checkVar(forward)) {
-            changeVar(forward, 1);
-            oledBlink(50);
-        }
+            if(!digitalRead(BTN1) && checkVar(forward)) {
+                changeVar(forward, 0);
+            }
+            if(digitalRead(BTN1) && !checkVar(forward)) {
+                changeVar(forward, 1);
+            }
 
-        if(digitalRead(BTN3)){
-            changeVar(match, 0);
-            float distance;
             for(int i=1; i<4; i++){
                 distance = readUltrasonic(checkVar(forward)? 'f' : 'b', i);
                 oledPrintln(distance, 15*i + 15, 0);
             }
-        }
-        else{
-            changeVar(match, 1);
-            oledPrintln(checkVar(match)? "match" : "practice", 30, 0);
-        }
 
-        // if(!digitalRead(BTNC)){
-        //     while(!digitalRead(BTNC));
-        //     LRM ++;
-        //     if(LRM == 4) LRM = 1;
-        // }        
+            // if(!digitalRead(BTNC)){
+            //     while(!digitalRead(BTNC));
+            //     LRM ++;
+            //     if(LRM == 4) LRM = 1;
+            // }        
 
-        if(digitalRead(BTN4)){
-            setServo(7);
-            // while(digitalRead(BTN4));
-            // struct wheel_step_data pas;
-            // set_wheels_rotation_from_distance(50, &pas, &pas);
-            // avancer(pas.step_number);
-            // while(!motor_free);
-            // reculer(pas.step_number);
-            // while(!motor_free);
+            if(digitalRead(BTN3)){
+                setServo(7);
+                // while(digitalRead(BTN4));
+                // struct wheel_step_data pas;
+                // set_wheels_rotation_from_distance(50, &pas, &pas);
+                // avancer(pas.step_number);
+                // while(!motor_free);
+                // reculer(pas.step_number);
+                // while(!motor_free);
+            }
+            else{
+                setServo(105);
+            }
+            oledBlink(5);
         }
-        else{
-            setServo(105);
-        }
-
-        oledBlink(20);
     }
     oledRefresh();
+    return score;
 }

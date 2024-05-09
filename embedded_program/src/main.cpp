@@ -6,6 +6,7 @@
 #include "Arduino.h"
 #include "printing.h"
 #include "oled_screen.h"
+#include "variables.h"
 
 
 const unsigned int MAX_SEQUENCE_LENGTH = 200;
@@ -49,15 +50,19 @@ void scheduleNextInstruction()
 
 const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals
 unsigned int t = 0;
+int score = 33;
 
 void setup()
 {
     initiateBoardVars();
     // t = 0;
     Serial.begin(9600);
-    interface();
+    score = interface();
+    // if(checkVar(team)== blue) score = 33;
+    // else score = 33;
     matchStart = millis();
     Serial.println("end setup");
+
 }
 
 void loop()
@@ -65,7 +70,7 @@ void loop()
     if (t++ == DELTA_T) {
         t = 0;
         processOutsideSignals();
-        oledPrintScore(41);
+        oledPrintScore(score);
     }
     if (isStepperFree()){
         scheduleNextInstruction();
