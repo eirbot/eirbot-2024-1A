@@ -9,6 +9,7 @@
 
 
 const unsigned int MAX_SEQUENCE_LENGTH = 200;
+unsigned int matchStart = 0;
 
 
 void processOutsideSignals()
@@ -22,6 +23,10 @@ void processOutsideSignals()
     // } else{
         processExternalSignals();
         processExternalInstructions();
+        if(millis() - matchStart > 90000){
+            abortRunningTask();
+            while(1);
+        }
         oledBlink(3);
         // Serial.println("processOutsideSignals");
         // if(Serial1.available()){
@@ -51,6 +56,7 @@ void setup()
     // t = 0;
     Serial.begin(9600);
     interface();
+    matchStart = millis();
     Serial.println("end setup");
 }
 

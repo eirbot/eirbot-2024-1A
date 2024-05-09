@@ -5,7 +5,8 @@ enum variableName{
     forward = 1,
     manual = 2,
     instruct = 3,
-    team = 4
+    team = 4,
+    match = 5
 };
 
 #define blue 0

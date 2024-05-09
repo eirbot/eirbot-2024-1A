@@ -89,7 +89,7 @@ void stratBlueFFFF(){
 }
 
 void stratBlue(){
-    enqueueInstruction({'f', 170});
+    enqueueInstruction({'7', 170});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
     enqueueInstruction({'h', 170});
@@ -104,14 +104,14 @@ void stratBlue(){
 }
 
 void stratYellowFFFF(){
-    enqueueInstruction({'b', 170});
+    enqueueInstruction({'b', 185});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
-    enqueueInstruction({'g', 170});
+    enqueueInstruction({'g', 185});
     enqueueInstruction({'p', 105});
     enqueueInstruction({'s', 300});
     enqueueInstruction({'b', 125});
-    enqueueInstruction({'l', 3.14 - 2.15});
+    enqueueInstruction({'l', 3.14 - 2.2});
     enqueueInstruction({'f', 190});
     // enqueueInstruction({'r', 95*3.14/180});
     // enqueueInstruction({'f', 120});
@@ -119,7 +119,7 @@ void stratYellowFFFF(){
 }
 
 void stratYellow(){
-    enqueueInstruction({'b', 185});
+    enqueueInstruction({'8', 185});
     enqueueInstruction({'p', 7});
     enqueueInstruction({'s', 90});
     enqueueInstruction({'g', 185});
@@ -236,10 +236,12 @@ void inspectEnvironmentAndComputeNewStrategy()
     // droiteGauche();
 
     if(checkVar(team) == blue){
-        stratBlue();
+        if(checkVar(match)) stratBlueFFFF();
+        else stratBlue();
     }
     else if(checkVar(team) == yellow){
-        stratYellow();
+        if(checkVar(match)) stratYellowFFFF();
+        else stratYellow();
     }
 
     // panneaux_solaires_bleus();

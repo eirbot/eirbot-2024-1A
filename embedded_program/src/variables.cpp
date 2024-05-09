@@ -5,6 +5,7 @@ char forwardVal = 1;
 char manualVal = 0;
 char instructVal = 0;
 char teamVal = yellow;
+char matchVal = 1;
 
 void changeVar(enum variableName variableName, int value){
     switch(variableName){
@@ -29,6 +30,12 @@ void changeVar(enum variableName variableName, int value){
         case 4:
         {
             teamVal = value;
+        }
+        break;
+
+        case match:
+        {
+            matchVal = value;
         }
         break;
 
@@ -60,6 +67,12 @@ int checkVar(enum variableName variableName){
         case 4:
         {
             return teamVal;
+        }
+        break;
+
+        case match:
+        {
+            return matchVal;
         }
         break;
 
