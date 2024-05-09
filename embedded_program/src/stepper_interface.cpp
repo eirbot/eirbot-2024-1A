@@ -68,30 +68,90 @@ void setMotorsSteps(struct instruction instrct)
     switch (instrct.instruction_type) {
         case 'f':
         {
-            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
-            changeVar(forward, 1);
-            avancer(right_wheel_data.step_number, d300);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('f', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 1);
+                avancer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case 'b':
         {
-            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
-            changeVar(forward, 0);
-            reculer(right_wheel_data.step_number, d300);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('b', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 0);
+                reculer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case 'g':
         {
-            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
-            changeVar(forward, 1);
-            avancer(right_wheel_data.step_number, d90);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('f', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 1);
+                avancer(right_wheel_data.step_number, d90);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case 'h':
         {
-            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
-            changeVar(forward, 0);
-            reculer(right_wheel_data.step_number, d90);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('b', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 0);
+                reculer(right_wheel_data.step_number, d90);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         // case 'f':
@@ -110,14 +170,53 @@ void setMotorsSteps(struct instruction instrct)
         //     break;
         case 'r':
         {
-            set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
-            tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            char ok = 1;
+            float distance;
+
+            distance = readUltrasonic('f', 1);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            distance = readUltrasonic('b', 2);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+            
+            if(ok){
+                set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
+                tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case 'l':
         {
-            set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
-            tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            char ok = 1;
+            float distance;
+            distance = readUltrasonic('f', 2);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            distance = readUltrasonic('b', 1);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            if(ok){
+                set_wheels_rotation_from_global_rotation(instrct.value, &left_wheel_data, &right_wheel_data);
+                tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }            
         }
             break;
         case 's':
@@ -148,45 +247,191 @@ void setMotorsSteps(struct instruction instrct)
             break;
         case '1':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            changeVar(forward, 1);
-            avancer(right_wheel_data.step_number, d300);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('f', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                changeVar(forward, 1);
+                avancer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+                pushInstruction({'w', 0.2});
+            }
         }
             break;
         case '2':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            changeVar(forward, 0);
-            reculer(right_wheel_data.step_number, d300);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('b', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                changeVar(forward, 0);
+                reculer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case '3':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            left_wheel_data.step_number = (unsigned int) instrct.value;
-            tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            char ok = 1;
+            float distance;
+
+            distance = readUltrasonic('f', 1);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            distance = readUltrasonic('b', 2);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+            
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                left_wheel_data.step_number = (unsigned int) instrct.value;
+                tournerDroite(left_wheel_data.step_number, right_wheel_data.step_number);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }            
         }
             break;
         case '4':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            left_wheel_data.step_number = (unsigned int) instrct.value;
-            tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            char ok = 1;
+            float distance;
+            distance = readUltrasonic('f', 2);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            distance = readUltrasonic('b', 1);
+            
+            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                ok = 0;
+            }
+
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                left_wheel_data.step_number = (unsigned int) instrct.value;
+                tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case '5':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            changeVar(forward, 1);
-            avancer(right_wheel_data.step_number, d90);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('f', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                changeVar(forward, 1);
+                avancer(right_wheel_data.step_number, d90);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
             break;
         case '6':
         {
-            right_wheel_data.step_number = (unsigned int) instrct.value;
-            changeVar(forward, 0);
-            reculer(right_wheel_data.step_number, d90);
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('b', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                right_wheel_data.step_number = (unsigned int) instrct.value;
+                changeVar(forward, 0);
+                reculer(right_wheel_data.step_number, d90);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
         }
+            break;
+        
+        case '7':
+        {
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('f', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 1);
+                avancer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
+        }
+            break;
+        case '8':
+        {
+            char ok = 1;
+            float distance;
+            for(int i=1; i<4; i++){
+                distance = readUltrasonic('b', i);
+                
+                if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+                    ok = 0;
+                    break;
+                }
+            }
+            if(ok){
+                set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+                changeVar(forward, 0);
+                reculer(right_wheel_data.step_number, d300);
+            }
+            else{
+                pushInstruction({instrct.instruction_type, instrct.value});
+            }
+        }
+            break;
         
         default:
             break;
@@ -257,6 +502,14 @@ char switchInstuct(char instructVal){
         case 'h':
         return '6';
         break;
+
+        case '6':
+        return 'a';
+        break;
+
+        case '7':
+        return 'a';
+        break;
         
         default:
         return instructVal;
@@ -264,7 +517,7 @@ char switchInstuct(char instructVal){
 }
 
 void interface(){
-    char LRM = 1;
+    // char LRM = 1;
     while(!digitalRead(tirettePin)){
 
         if(digitalRead(BTN1) && checkVar(team) == blue){
@@ -286,7 +539,7 @@ void interface(){
         }
 
         if(digitalRead(BTN3)){
-
+            changeVar(match, 0);
             float distance;
             for(int i=1; i<4; i++){
                 distance = readUltrasonic(checkVar(forward)? 'f' : 'b', i);
@@ -294,17 +547,15 @@ void interface(){
             }
         }
         else{
-            // oledRefresh();
-            float distance = readUltrasonic(checkVar(forward)? 'f' : 'b', LRM);
-            oledPrintln(distance, 30, 0);
-            oledPrintln((float) LRM, 45, 0);
+            changeVar(match, 1);
+            oledPrintln(checkVar(match)? "match" : "practice", 30, 0);
         }
 
-        if(!digitalRead(BTNC)){
-            while(!digitalRead(BTNC));
-            LRM ++;
-            if(LRM == 4) LRM = 1;
-        }        
+        // if(!digitalRead(BTNC)){
+        //     while(!digitalRead(BTNC));
+        //     LRM ++;
+        //     if(LRM == 4) LRM = 1;
+        // }        
 
         if(digitalRead(BTN4)){
             setServo(7);
