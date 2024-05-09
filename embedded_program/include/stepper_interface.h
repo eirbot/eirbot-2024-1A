@@ -3,6 +3,7 @@
 
 #include "instruction.h"
 
+
 void initiateBoardVars();
 void setMotorsSteps(struct instruction instrct);
 void executeOneMotorStep();

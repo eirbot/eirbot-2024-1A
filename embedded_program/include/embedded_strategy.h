@@ -29,6 +29,6 @@ void avoid_other_bot(unsigned int total_scheduled_steps, unsigned int remaining_
  * task queue. The decision-making algorithm is based on
  * robot's sensorial data.
 */
-void inspectEnvironmentAndComputeNewStrategy();
+void initialGlobalStrategy();
 
 #endif

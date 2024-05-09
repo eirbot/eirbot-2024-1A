@@ -24,4 +24,14 @@ void set_wheels_rotation_from_global_rotation(float theta_rad, struct wheel_step
  */
 void set_wheels_rotation_from_distance(float distance, struct wheel_step_data *left_wheel_step_data, struct wheel_step_data *right_wheel_step_data);
 
+/**
+ * Return a valuation of the positive rotation reacht with the scheduled step number.
+*/
+float steps_to_radian(unsigned int step_number);
+
+/**
+ * Return a valuation of the positive distance reacht with the scheduled step number.
+*/
+float steps_to_centimetres(unsigned int step_number);
+
 #endif

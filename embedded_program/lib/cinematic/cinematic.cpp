@@ -68,6 +68,7 @@ float angle__add(float angle1, float angle2)
         return new_rotation - M_TWOPI;
     if (new_rotation < -M_PI)
         return new_rotation + M_TWOPI;
+    return new_rotation;
 }
 
 float opposite_angle(float rotation_angle)

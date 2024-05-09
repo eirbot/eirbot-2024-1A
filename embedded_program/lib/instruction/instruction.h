@@ -2,7 +2,9 @@
 #define __INSTRUCTION_H__
 
 #define FORWARD 'f'
+#define FORWARD_SLOW 'g'
 #define BACKWARD 'b'
+#define BACKWARD_SLOW 'h'
 #define NON_TRIG_ROTATE 'r'
 #define TRIG_ROTATE 'l'
 #define ROTATE_ARM 'p'
@@ -36,5 +38,14 @@ struct instruction {
     char instruction_type;
     float value;
 };
+
+char is_forward_instruction(const struct instruction *i);
+char is_backward_instruction(const struct instruction *i);
+char is_trig_rotation_instruction(const struct instruction *i);
+char is_non_trig_rotation_instruction(const struct instruction *i);
+char is_rotation_instruction(const struct instruction *i);
+char is_rectilinear_move_instruction(const struct instruction *i);
+char is_in_step_instruction(const struct instruction *i);
+char is_in_standard_unit_instruction(const struct instruction *i);
 
 #endif

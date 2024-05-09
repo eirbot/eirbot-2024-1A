@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "instruction.h"
 #include "stepper_interface.h"
-#include "task_queue.h"
 #include "strategy_interface.h"
+#include "task_queue.h"
 #include "signals.h"
 #include "printing.h"
 #include "oled_screen.h"
@@ -44,9 +44,12 @@ void scheduleNextInstruction()
 {
     if (isQueueEmpty())
         inspectEnvironmentAndComputeNewStrategy();
-    struct dequeuedInstruction = dequeueInstruction();
-    updateStrategicData(dequeuedInstruction); 
-    setMotorsSteps(dequeuedInstruction);
+    struct instruction dequeuedInstruction = dequeueInstruction();
+    updateStrategicData(&dequeuedInstruction);
+    if (canExecuteInstruction(&dequeuedInstruction))
+        setMotorsSteps(dequeuedInstruction);
+    else
+        scheduleDeviationNow();
 }
 
 const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals

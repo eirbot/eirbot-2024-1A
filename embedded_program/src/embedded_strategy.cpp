@@ -30,10 +30,10 @@ void updateNextValuedOrientation(float rotation_rad, int is_trig_rotation)
 void avoid_other_bot(unsigned int total_scheduled_steps, unsigned int remaining_steps,
                      int is_forward_move) {
     struct vector2 currentMoveVector = vec__minus(&nextValuedPosition, &lastStartValuedPosition);
-    struct vector2 currentValuedPosition = vec__add(&lastStartValuedPosition, {
-        currentMoveVector.x*remaining_steps/total_scheduled_steps,
-        currentMoveVector.y*remaining_steps/total_scheduled_steps
-    });
+    currentMoveVector.x *= remaining_steps/total_scheduled_steps;
+    currentMoveVector.y *= remaining_steps/total_scheduled_steps;
+    struct vector2 currentValuedPosition = vec__add(&lastStartValuedPosition, &currentMoveVector);
+    // TODO
 }
 
 void allerRetour(float distance){
@@ -242,7 +242,7 @@ void staticPath()
     // schedule_path(currentOrientation, path, 2);
 }
 
-void inspectEnvironmentAndComputeNewStrategy()
+void initialGlobalStrategy()
 {
     //TODO: enqueue a cyclic instruction
     // enqueueInstruction({'a', 0});   
