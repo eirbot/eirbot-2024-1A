@@ -73,26 +73,69 @@ void ramenerLesPots(){
     enqueueInstruction({'e', 0});
 }
 
-void stratBlue(){
-    enqueueInstruction({'f', 80});
+void stratBlueFFFF(){
+    enqueueInstruction({'f', 170});
     enqueueInstruction({'p', 7});
-    enqueueInstruction({'b', 80});
-    enqueueInstruction({'p', 100});
-    enqueueInstruction({'f', 120});
-    enqueueInstruction({'l', 3.14/2});
-    enqueueInstruction({'f', 37});
-    enqueueInstruction({'r', 95*3.14/180});
-    enqueueInstruction({'f', 120});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'h', 170});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'f', 125});
+    enqueueInstruction({'l', 2.15});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
+void stratBlue(){
+    enqueueInstruction({'f', 170});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'h', 170});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'f', 125});
+    enqueueInstruction({'l', 2.15});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
+void stratYellowFFFF(){
+    enqueueInstruction({'b', 170});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'g', 170});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'b', 125});
+    enqueueInstruction({'l', 3.14 - 2.15});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
     enqueueInstruction({'e', 0});
 }
 
 void stratYellow(){
-    allerRetour(70);
+    enqueueInstruction({'b', 185});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'g', 185});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'b', 125});
+    enqueueInstruction({'l', 3.14 - 2.2});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
 }
 
 void bonjour(){
-    enqueueInstruction({'p', 0});
-    enqueueInstruction({'p', 90});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'p', 105});
 }
 
 void droiteGauche(){
@@ -103,6 +146,14 @@ void droiteGauche(){
     enqueueInstruction({'r', 3.14/2});
     enqueueInstruction({'w', 1});
 }
+
+void panneaux_solaires_bleus(){
+    enqueueInstruction({'f', 80});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'b', 80});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'e', 0});
+} 
 
 #define SOLAR_PANEL_AXIS 1752
 
@@ -184,12 +235,14 @@ void inspectEnvironmentAndComputeNewStrategy()
     // allerRetour(110);
     // droiteGauche();
 
-    // if(checkVar(team) == blue){
-    //     stratBlue();
-    // }
-    // else if(checkVar(team) == yellow){
-    //     stratYellow();
-    // }
+    if(checkVar(team) == blue){
+        stratBlue();
+    }
+    else if(checkVar(team) == yellow){
+        stratYellow();
+    }
+
+    // panneaux_solaires_bleus();
     
-    staticPath();
+    // staticPath();
 };

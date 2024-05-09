@@ -19,7 +19,7 @@ char gotEmergencyStopSignal()
 
 void processExternalSignals()
 {
-    if(checkVar(instruct) != 'w'){
+    if(checkVar(instruct) != 'w' && checkVar(instruct) != 'p'){
         float distance;
         for(int i=1; i<4; i++){
             if (checkVar(forward)){
@@ -43,7 +43,7 @@ void processExternalSignals()
             }
 
             // oledPrintln((char) checkVar(instruct), 15, 0);
-            oledPrintln(distance, 15*i + 15, 0);
+            // oledPrintln(distance, 15*i + 15, 0);
             // oledPrintln(posR, 45, 0);
             // oledPrintln(posL, 60, 0);
             // oledPrintln(par, 15, 64);

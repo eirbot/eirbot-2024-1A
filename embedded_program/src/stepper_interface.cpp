@@ -11,6 +11,12 @@
 
 #define DELAY_PER_STEP 20 // 0.02s
 
+// #define d300 45
+// #define d90 150
+
+#define d300 50
+#define d90 150
+
 unsigned int remaining_time; // multiple of 0.2s
 // the expected total number of steps achieved by the left wheel after the current instruction
 int scheduledStepNumberL;
@@ -63,14 +69,28 @@ void setMotorsSteps(struct instruction instrct)
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
             changeVar(forward, 1);
-            avancer(right_wheel_data.step_number);
+            avancer(right_wheel_data.step_number, d300);
         }
             break;
         case 'b':
         {
             set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
             changeVar(forward, 0);
-            reculer(right_wheel_data.step_number);
+            reculer(right_wheel_data.step_number, d300);
+        }
+            break;
+        case 'g':
+        {
+            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+            changeVar(forward, 1);
+            avancer(right_wheel_data.step_number, d90);
+        }
+            break;
+        case 'h':
+        {
+            set_wheels_rotation_from_distance(instrct.value, &left_wheel_data, &right_wheel_data);
+            changeVar(forward, 0);
+            reculer(right_wheel_data.step_number, d90);
         }
             break;
         // case 'f':
@@ -129,14 +149,14 @@ void setMotorsSteps(struct instruction instrct)
         {
             right_wheel_data.step_number = (unsigned int) instrct.value;
             changeVar(forward, 1);
-            avancer(right_wheel_data.step_number);
+            avancer(right_wheel_data.step_number, d300);
         }
             break;
         case '2':
         {
             right_wheel_data.step_number = (unsigned int) instrct.value;
             changeVar(forward, 0);
-            reculer(right_wheel_data.step_number);
+            reculer(right_wheel_data.step_number, d300);
         }
             break;
         case '3':
@@ -152,6 +172,20 @@ void setMotorsSteps(struct instruction instrct)
             left_wheel_data.step_number = (unsigned int) instrct.value;
             tournerGauche(left_wheel_data.step_number, right_wheel_data.step_number);
         }
+            break;
+        case '5':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            changeVar(forward, 1);
+            avancer(right_wheel_data.step_number, d90);
+        }
+            break;
+        case '6':
+        {
+            right_wheel_data.step_number = (unsigned int) instrct.value;
+            changeVar(forward, 0);
+            reculer(right_wheel_data.step_number, d90);
+        }
         
         default:
             break;
@@ -159,8 +193,8 @@ void setMotorsSteps(struct instruction instrct)
     changeVar(instruct, instrct.instruction_type);
     scheduledStepNumberL = left_wheel_data.step_number;
     scheduledStepNumberR = right_wheel_data.step_number;
-    oledPrintln(instrct.instruction_type, 15, 0);
-    oledPrintln(scheduledStepNumberR, 30, 0);
+    // oledPrintln(instrct.instruction_type, 15, 0);
+    // oledPrint(scheduledStepNumberR, 15, 35);
     
 }
 
@@ -214,6 +248,14 @@ char switchInstuct(char instructVal){
         case 'l':
         return '4';
         break;
+
+        case 'g':
+        return '5';
+        break;
+
+        case 'h':
+        return '6';
+        break;
         
         default:
         return instructVal;
@@ -251,7 +293,7 @@ void interface(){
             }
         }
         else{
-            oledRefresh();
+            // oledRefresh();
             float distance = readUltrasonic(checkVar(forward)? 'f' : 'b', LRM);
             oledPrintln(distance, 30, 0);
             oledPrintln((float) LRM, 45, 0);
@@ -274,9 +316,10 @@ void interface(){
             // while(!motor_free);
         }
         else{
-            setServo(100);
+            setServo(105);
         }
 
         oledBlink(20);
     }
+    oledRefresh();
 }

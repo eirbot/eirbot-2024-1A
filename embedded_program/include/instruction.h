@@ -18,6 +18,8 @@
  * Instruction types:
  * - 'f': rectilign forward movement (distance in cm)
  * - 'b': rectilign backward movement (distance in cm)
+ * - 'g': rectilign forward movement tuned for 90 step/sec (distance in cm)
+ * - 'h': rectilign backward movement tuned for 90 step/sec (distance in cm)
  * - 'r': static non-trigo rotation (angle in rad)
  * - 'l': static trigo rotation (angle in rad)
  * - 'p': arm rotation (angle in degree between 10° and 100°)
@@ -27,6 +29,8 @@
  * - '2': rectiling backward movement (in step number)
  * - '3': static non-trigo rotation (in step number)
  * - '4': static trigo rotation (in step number)
+ * - '5': rectilign forward movement tuned for 90 step/sec (in step number)
+ * - '6': rectilign backward movement tuned for 90 step/sec (in step number)
  */
 struct instruction {
     char instruction_type;
