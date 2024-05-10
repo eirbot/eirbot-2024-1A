@@ -8,27 +8,27 @@ char teamVal = yellow;
 char matchVal = 1;
 char captVal = on;
 
-void changeVar(enum variableName variableName, int value){
+void changeVar(enum variableName variableName, char value){
     switch(variableName){
-        case 1:
+        case forward:
         {
             forwardVal = value;
         }
         break;
 
-        case 2:
+        case manual:
         {
             manualVal = value;
         }
         break;
 
-        case 3:
+        case instruct:
         {
             instructVal = value;
         }
         break;
 
-        case 4:
+        case team:
         {
             teamVal = value;
         }
@@ -51,7 +51,7 @@ void changeVar(enum variableName variableName, int value){
     }
 }
 
-int checkVar(enum variableName variableName){
+char checkVar(enum variableName variableName){
     switch(variableName){
         case 1:
         {

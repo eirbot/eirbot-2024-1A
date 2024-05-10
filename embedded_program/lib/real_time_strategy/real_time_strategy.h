@@ -21,12 +21,13 @@ void updateNextValuedPosition(float forward_cm, int is_forward);
 void updateNextValuedOrientation(float rotation_rad, int is_trig_rotation);
 
 /** Push avoiding instructions to reach the next position which had been scheduled.
- * @param total_scheduled_steps the total number of steps which had been scheduled
- * @param remaining_steps the number of steps which has been remaining before the
- * interception of the robot by the other.
+ * @param progression_ratio the ratio of the recilinear/rotational task that has been
+ * achieved
  * @param is_forward_move 1 if the move is forward, 0 if it is a backward move. 
 */
-void avoid_other_bot(unsigned int total_scheduled_steps, unsigned int remaining_steps,
+void avoid_other_bot(float remaining_steps,
                      int is_forward_move);
+
+void avoir_other_robot_in_rotation(const struct instruction *impossible_rotation);
 
 #endif // __REAL_TIME_STRATEGY_H__

@@ -2,6 +2,7 @@
 #include "strategy_interface.h"
 #include "constants.h"
 #include "embedded_strategy.h"
+#include "stepper_interface.h"
 #include <real_time_strategy.h>
 #include <variables.h>
 #include "sensors.h"
@@ -61,7 +62,10 @@ char checkSensorsBeforeRotation(const struct instruction *instr)
 char canExecuteInstruction(const struct instruction *justDequeuedInstruction)
 {
     if (is_rotation_instruction(justDequeuedInstruction))
-        return checkSensorsBeforeRotation(justDequeuedInstruction);
+        // TODO: not allow rotation when sensors detect
+        // for now, we ignore this issue
+        // return checkSensorsBeforeRotation(justDequeuedInstruction);
+        return YES;
     if (is_rectilinear_move_instruction(justDequeuedInstruction))
         return checkSensorsBeforeRectilinearMove(justDequeuedInstruction);
     // arm rotation or waiting instruction => OK
@@ -86,9 +90,23 @@ void updateStrategicData(const struct instruction *justDequeuedInstruction)
     }
 }
 
-void scheduleDeviationNow()
+void scheduleDeviationNow(const struct instruction *interruptedInstr)
 {
-    avoid_other_bot(200, 0, YES); // mock values are here just to precise that 0 steps has been achieved.
+    if (is_rotation_instruction(interruptedInstr))
+        avoir_other_robot_in_rotation(interruptedInstr);
+    avoid_other_bot(0, YES); // mock values are here just to precise that 0 steps has been achieved.
+}
+
+void scheduleDeviationDuringMovement(const instruction *interruptedInstr)
+{
+    // TODO: for rotation, nothing is done
+    if (is_rectilinear_move_instruction(interruptedInstr)) {
+        unsigned int remainingSteps = abortRunningTask();
+        avoid_other_bot(remainingSteps / getScheduledStepNumber(), is_forward_instruction(interruptedInstr));
+    }
+    else
+        // TODO: manage during the rotation 
+        ;
 }
 
 void inspectEnvironmentAndComputeNewStrategy()

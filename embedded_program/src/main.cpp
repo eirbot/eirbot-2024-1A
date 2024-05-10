@@ -49,7 +49,7 @@ void scheduleNextInstruction()
     if (canExecuteInstruction(&dequeuedInstruction))
         setMotorsSteps(dequeuedInstruction);
     else
-        scheduleDeviationNow();
+        scheduleDeviationNow(&dequeuedInstruction);
 }
 
 const unsigned int DELTA_T = 5; // Each time the board will inspect the received signals

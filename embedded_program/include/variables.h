@@ -20,7 +20,7 @@ enum variableName{
 #define strat6P 2
 #define strat3P 3
 
-void changeVar(enum variableName variableName, int value);
-int checkVar(enum variableName variableName);
+void changeVar(enum variableName variableName, char value);
+char checkVar(enum variableName variableName);
 
 #endif

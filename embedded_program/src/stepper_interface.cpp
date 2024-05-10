@@ -280,6 +280,11 @@ char switchInstuct(char instructVal){
     }
 }
 
+unsigned int getScheduledStepNumber()
+{
+    return (scheduledStepNumberL >= 0) ? scheduledStepNumberL: -scheduledStepNumberL;
+}
+
 int interface(){
     // char LRM = 1;
     int score = 33;

@@ -13,6 +13,8 @@ int abortRunningTask();
 
 char switchInstuct(char instructVal);
 
+unsigned int getScheduledStepNumber();
+
 int interface();
 
 #endif

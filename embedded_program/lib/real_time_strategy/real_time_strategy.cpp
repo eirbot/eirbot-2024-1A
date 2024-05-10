@@ -3,6 +3,7 @@
 #include <constants.h>
 #include <instruction.h>
 #include <task_queue.h>
+#include "real_time_strategy.h"
 
 float currentOrientation;
 struct vector2 lastStartValuedPosition;
@@ -65,12 +66,12 @@ void reach_next_position_from_deviation(float remaining_distance, const struct v
     return skip_current_scheduled_position(remaining_distance, currentStopPosition);
 }
 
-void avoid_other_bot(unsigned int total_scheduled_steps, unsigned int remaining_steps,
+void avoid_other_bot(float progression_ratio,
                      int is_forward_move) {
     struct vector2 achievedMoveVector = vec__minus(&nextValuedPosition, &lastStartValuedPosition);
-    float remaining_distance = vec__magnitude(&achievedMoveVector);
-    achievedMoveVector.x *= (1-remaining_steps/total_scheduled_steps);
-    achievedMoveVector.y *= (1-remaining_steps/total_scheduled_steps);
+    float remaining_distance = vec__magnitude(&achievedMoveVector)*progression_ratio;
+    achievedMoveVector.x *= (1-progression_ratio);
+    achievedMoveVector.y *= (1-progression_ratio);
     struct vector2 currentValuedPosition = vec__add(&lastStartValuedPosition, &achievedMoveVector);
     if (remaining_distance < DANGER_ZONE_RADIUS)
         // the next position is unreachable so we skip it
@@ -78,4 +79,11 @@ void avoid_other_bot(unsigned int total_scheduled_steps, unsigned int remaining_
         return skip_current_scheduled_position(remaining_distance, &currentValuedPosition);
     // try to make a deviation
     return reach_next_position_from_deviation(remaining_distance, &currentValuedPosition);
+}
+
+void avoir_other_robot_in_rotation(const struct instruction *impossible_rotation)
+{
+    //TOOD
+    pushInstruction(*impossible_rotation);
+    pushInstruction({WAIT, 5});
 }

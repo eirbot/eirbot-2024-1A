@@ -81,8 +81,6 @@ void test_strategic_path(void) {
     };
     float currentOrientation = schedule_path(0, path, 2);
 
-    // TODO: slow down for solar panels
-
     path[0] = {116.3, SOLAR_PANEL_AXIS};
     path[1] = {282.5, SOLAR_PANEL_AXIS};
     currentOrientation = schedule_path(currentOrientation, path, 2);

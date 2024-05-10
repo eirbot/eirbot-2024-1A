@@ -25,7 +25,12 @@ void updateStrategicData(const struct instruction *justDequeuedInstruction);
  * 
  * This function assumes there is no instruction being executing. 
 */
-void scheduleDeviationNow();
+void scheduleDeviationNow(const struct instruction *interruptedInstr);
+
+/**
+ * This function assumes an action is being executed.
+*/
+void scheduleDeviationDuringMovement(const struct instruction *interruptedInstr);
 
 /**
  * @brief Generate a range of instructions and enqueued it to the

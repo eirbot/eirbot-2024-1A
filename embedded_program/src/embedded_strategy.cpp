@@ -204,6 +204,7 @@ void panneaux_solaires_bleus(){
 void staticPath()
 {
     // TODO: adapt for blue team
+    enqueueInstruction({WAIT, 10});
     // TODO: everything in euclidian coordinates
     // 6 solar panels turned
     struct vector2 path[4] = {
@@ -249,21 +250,6 @@ void staticPath()
 
 void initialGlobalStrategy()
 {
-    //TODO: enqueue a cyclic instruction
-    // enqueueInstruction({'a', 0});   
-    // carre();
-    // allerRetour(110);
-    // droiteGauche();
-
-    // if(checkVar(team) == blue){
-    //     if(checkVar(match)) stratBlue3P();
-    //     else stratBlue();
-    // }
-    // else if(checkVar(team) == yellow){
-    //     if(checkVar(match)) stratYellow3P();
-    //     else stratYellow();
-    // }
-
     switch (checkVar(match))
     {
     case stratReact:
