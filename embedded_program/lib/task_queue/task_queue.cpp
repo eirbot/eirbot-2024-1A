@@ -69,8 +69,10 @@ void pushInstruction(struct instruction instrct) {
 }
 
 void displayQueue() {
-    if (isQueueEmpty())
+    if (isQueueEmpty()) {
         Serial.println("<empty queue>\n");
+        return;
+    }
     int i = head_cursor;
     int last_index = (tail_cursor < MAX_QUEUE_SIZE - 1) ? tail_cursor+1 : 0; 
     while (i != last_index) {

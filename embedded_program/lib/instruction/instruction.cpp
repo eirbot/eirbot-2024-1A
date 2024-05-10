@@ -87,13 +87,16 @@ void displayInstruction(const struct instruction *i)
 
     if (is_in_step_instruction(i))
         strcpy(unit, "STEP");
-    else if (is_forward_instruction(i))
+    else if (is_rectilinear_move_instruction(i))
         strcpy(unit, "CM");
     else if (i->instruction_type == WAIT)
         strcpy(unit, "SEC");
     else if (i->instruction_type == CHANGE_SPEED)
         strcpy(unit, "STEP/S");
-    else {
+    else if (i->instruction_type == ROTATE_ARM)
+        strcpy(unit, "DEG");
+    else if (is_rotation_instruction(i)) {
+        // strcpy(unit, "RAD");
         value = value*180/M_PI;
         strcpy(unit, "DEG");
     }

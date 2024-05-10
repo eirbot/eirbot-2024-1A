@@ -1,10 +1,10 @@
 #include <Arduino.h>
 #include <math.h>
 #include "embedded_strategy.h"
-#include "constants.h"
-#include "cinematic.h"
-#include "task_queue.h"
-#include "variables.h"
+#include <constants.h>
+#include <cinematic.h>
+#include <task_queue.h>
+#include <variables.h>
 
 #define delayI 0.4
 #define MAX_PATH_LENGTH = 256
@@ -264,37 +264,43 @@ void initialGlobalStrategy()
     //     else stratYellow();
     // }
 
-    switch(checkVar(match)){
-        case stratReact:
-            if(checkVar(team) == blue){
-                stratBlueReact();
-            }
-            else{
-                stratYellowReact();
-            }
-            break;
+    switch (checkVar(match))
+    {
+    case stratReact:
+        if (checkVar(team) == blue)
+        {
+            stratBlueReact();
+        }
+        else
+        {
+            stratYellowReact();
+        }
+        break;
 
-            case strat6P:
-            if(checkVar(team) == blue){
-                stratBlue6P();
-            }
-            else{
-                stratYellow6P();
-            }
-            break;
+    case strat6P:
+        if (checkVar(team) == blue)
+        {
+            stratBlue6P();
+        }
+        else
+        {
+            stratYellow6P();
+        }
+        break;
 
-            case strat3P:
-            if(checkVar(team) == blue){
-                stratBlue3P();
-            }
-            else{
-                stratYellow3P();
-            }
-            break;
+    case strat3P:
+        if (checkVar(team) == blue)
+        {
+            stratBlue3P();
+        }
+        else
+        {
+            stratYellow3P();
+        }
+        break;
 
-        default:
-            break;
-
+    default:
+        break;
     }
 
     // panneaux_solaires_bleus();
