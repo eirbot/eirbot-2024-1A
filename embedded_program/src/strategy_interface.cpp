@@ -2,6 +2,8 @@
 #include "strategy_interface.h"
 #include "constants.h"
 #include "embedded_strategy.h"
+#include <real_time_strategy.h>
+#include <variables.h>
 #include "sensors.h"
 
 #define YES 1
@@ -91,5 +93,6 @@ void scheduleDeviationNow()
 
 void inspectEnvironmentAndComputeNewStrategy()
 {
+    init_strategic_data(checkVar(team) == blue);
     initialGlobalStrategy();
 }

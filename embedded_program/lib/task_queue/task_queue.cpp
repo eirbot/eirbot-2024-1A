@@ -74,10 +74,7 @@ void displayQueue() {
     int i = head_cursor;
     int last_index = (tail_cursor < MAX_QUEUE_SIZE - 1) ? tail_cursor+1 : 0; 
     while (i != last_index) {
-        Serial.print("Type: '");
-        Serial.println(queue[i].instruction_type);
-        Serial.println("', Value: ");
-        Serial.println(queue[i].value);
+        displayInstruction(queue + i);
         i = (i-1)%MAX_QUEUE_SIZE;
     }
 }

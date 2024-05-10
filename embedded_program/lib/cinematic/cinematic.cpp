@@ -1,6 +1,7 @@
 #include "cinematic.h"
-#include "task_queue.h"
-#include "instruction.h"
+#include <task_queue.h>
+#include <instruction.h>
+
 #include <math.h>
 
 #define YES 1

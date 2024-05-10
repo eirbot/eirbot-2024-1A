@@ -15,6 +15,8 @@
 #define BACKWARD_S '2'
 #define NON_TRIG_ROTATE_S '3'
 #define TRIG_ROTATE_S '4'
+#define FORWARD_SLOW_S '5'
+#define BACKWARD_SLOW_S '6'
 
 /**
  * Instruction types:
@@ -47,5 +49,7 @@ char is_rotation_instruction(const struct instruction *i);
 char is_rectilinear_move_instruction(const struct instruction *i);
 char is_in_step_instruction(const struct instruction *i);
 char is_in_standard_unit_instruction(const struct instruction *i);
+
+void displayInstruction(const struct instruction *i);
 
 #endif
