@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <math.h>
 #include "embedded_strategy.h"
-#include <constants.h>
+#include <table.h>
 #include <cinematic.h>
 #include <task_queue.h>
 #include <variables.h>

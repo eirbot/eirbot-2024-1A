@@ -1,6 +1,6 @@
 #include <conversions.h>
 #include "strategy_interface.h"
-#include "constants.h"
+#include <table.h>
 #include "embedded_strategy.h"
 #include "stepper_interface.h"
 #include <real_time_strategy.h>

@@ -16,6 +16,11 @@ struct vector2 vec__add(const struct vector2 *a, const struct vector2 *b);
 struct vector2 vec__minus(const struct vector2 *a, const struct vector2 *b);
 
 /**
+ * @brief return if the point is in the table
+*/
+char is_point_in_table(const struct vector2 *a);
+
+/**
  * @brief Return the 2-magnitude of a.
 */
 float vec__magnitude(const struct vector2 *a);

@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <cinematic.h>
-#include <constants.h>
+#include <table.h>
 #include <instruction.h>
 #include <task_queue.h>
 #include "real_time_strategy.h"
@@ -46,22 +46,40 @@ void skip_current_scheduled_position(float remaining_distance, const struct vect
     // float rotation = dequeueInstruction();
 }
 
+char can_deviate_from_side(float remaining_distance, const struct vector2 *currentStopPosition, char deviate_from_left)
+{
+    int angle_sign = deviate_from_left ? 1: -1;
+    struct vector2 deviationVec = vec_from_arg(angle__add(currentOrientation, angle_sign*M_PI_2), BOT_AVERAGE_WIDTH);
+    struct vector2 firstPoint = vec__add(currentStopPosition, &deviationVec);
+    if (!is_point_in_table(&firstPoint)) return 0;
+    struct vector2 forwardVec = vec_from_arg(currentOrientation, remaining_distance);
+    struct vector2 secondPoint = vec__add(&firstPoint, &forwardVec);
+    return is_point_in_table(&secondPoint);
+
+}
+
 void reach_next_position_from_deviation(float remaining_distance, const struct vector2 *currentStopPosition)
 {
-    // TODO: figure out if a deviation on the left is possible
-    // then
+    if (can_deviate_from_side(remaining_distance, currentStopPosition, 1)) {
         nextValuedPosition = *currentStopPosition;
+        pushInstruction({FORWARD, BOT_AVERAGE_WIDTH});
         pushInstruction({NON_TRIG_ROTATE, M_PI_2});
         pushInstruction({FORWARD, remaining_distance});
+        pushInstruction({NON_TRIG_ROTATE, M_PI_2});
+        pushInstruction({FORWARD, BOT_AVERAGE_WIDTH});
         pushInstruction({TRIG_ROTATE, M_PI_2});
         return;
+    }
 
-    // TODO: figure out if a deviation on the right is possible
-    // then
-    //    pushInstruction({TRIG_ROTATE, M_PI_2});
-    //    pushInstruction({FORWARD, remaining_distance});
-    //    pushInstruction({NON_TRIG_ROTATE, M_PI_2});
-    //    return;
+    if (can_deviate_from_side(remaining_distance, currentStopPosition, 0)) {
+        pushInstruction({FORWARD, BOT_AVERAGE_WIDTH});
+        pushInstruction({TRIG_ROTATE, M_PI_2});
+        pushInstruction({FORWARD, remaining_distance});
+        pushInstruction({TRIG_ROTATE, M_PI_2});
+        pushInstruction({FORWARD, BOT_AVERAGE_WIDTH});
+        pushInstruction({NON_TRIG_ROTATE, M_PI_2});
+        return;
+    }
 
     return skip_current_scheduled_position(remaining_distance, currentStopPosition);
 }

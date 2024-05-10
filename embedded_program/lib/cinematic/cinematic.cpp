@@ -1,6 +1,7 @@
 #include "cinematic.h"
 #include <task_queue.h>
 #include <instruction.h>
+#include <table.h>
 
 #include <math.h>
 
@@ -41,6 +42,12 @@ float vec__magnitude(const struct vector2 *a)
     int x = a->x;
     int y = a->y;
     return sqrtf(x*x + y*y);
+}
+
+char is_point_in_table(const struct vector2 *a)
+{
+    float mid_width = BOT_AVERAGE_WIDTH/2;
+    return (mid_width <= a->x && a->x <= TABLE_WIDTH - mid_width) && (mid_width <= a->y && a->y <= TABLE_HEIGHT - mid_width);
 }
 
 float scalar_product(const struct vector2 *a, const struct vector2 *b)

@@ -2,7 +2,7 @@
 #include "sensors.h"
 #include "printing.h"
 #include "pins.h"
-#include "constants.h"
+#include <table.h>
 #include <task_queue.h>
 #include "variables.h"
 #include "stepper_interface.h"

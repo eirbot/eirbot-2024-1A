@@ -18,5 +18,7 @@
 #endif // SOLAR_PANEL_AXIS
 
 #define BOT_AVERAGE_WIDTH 30
+#define TABLE_WIDTH 3000
+#define TABLE_HEIGHT 2000
 
 #endif // __CONSTANTS_H__
