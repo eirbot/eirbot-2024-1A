@@ -222,6 +222,10 @@ void setMotorsSteps(struct instruction instrct)
         {
             setSpeed(instrct.value);
         }
+        case 'v':
+        {
+            avancerVit(instrct.value);
+        }
             break;
         case 'p':
         {
@@ -521,6 +525,7 @@ int interface(){
     char debugMode = 0;
     char matchMode = 0;
     float distance = 0;
+    float buffer[BUFFER_SIZE];
     while(!digitalRead(tirettePin)){
 
         if(!digitalRead(BTN4)){             // match mode
@@ -534,8 +539,8 @@ int interface(){
             oledPrintln(checkVar(team)? "equ jaune" : "equ bleue",15, 0);
             
             if(!digitalRead(BTN3)){
-                oledSquare(30, on);
-                oledSquare(60, off);
+                oledSquare(22, on);
+                oledSquare(52, off);
 
                 if(!digitalRead(BTNC)){
                     while(!digitalRead(BTNC));
@@ -549,8 +554,8 @@ int interface(){
                 }
             }
             else {
-                oledSquare(30, off);
-                oledSquare(60, on);
+                oledSquare(22, off);
+                oledSquare(52, on);
 
                 if(!digitalRead(BTNC)){
                     while(!digitalRead(BTNC));
@@ -563,15 +568,21 @@ int interface(){
             }
 
             switch(checkVar(match)){
-                case stratReact:
-                    oledPrintln("strat react",30, 0);
+                case stratCarre:
+                    oledPrintln("carre",30, 0);
                     break;
-                case strat6P:
-                    oledPrintln("strat 6 p",30, 0);
+                case aller_retour:
+                    oledPrintln("aller retour",30, 0);
                     break;
-                case strat3P:
-                    oledPrintln("strat 3 p",30, 0);
+                case drag:
+                    oledPrintln("drag",30, 0);
                     break;
+                // case stratTest:
+                //     oledPrintln("strat test", 30, 0);
+                //     break;
+                // case stratDrag:
+                //     oledPrintln("strat drag", 30, 0);
+                //     break;
                 default:
                     oledPrintln("wrong strat",30, 0);
                     break;
@@ -614,9 +625,18 @@ int interface(){
                 changeVar(forward, 1);
             }
 
+            for(int i=BUFFER_SIZE-1; i>2; i--){
+                buffer[i] = buffer[i-3];
+            }
             for(int i=1; i<4; i++){
                 distance = readUltrasonic(checkVar(forward)? 'f' : 'b', i);
-                oledPrintln(distance, 15*i + 15, 0);
+                buffer[i-1] = distance;
+
+                float moy = 0;
+                for(int k=0; k<BUFFER_SIZE/3; k++){
+                    moy += buffer[i-1 + k*3];
+                }
+                oledPrintln(moy, 15*i + 15, 0);
             }
 
             // if(!digitalRead(BTNC)){

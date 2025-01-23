@@ -42,7 +42,7 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
         150.0,                         /* Motor initial speed [step/s]. */
         600.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
         600.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        300.0,                         /* Motor maximum speed [step/s]. */
+        1000.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -70,7 +70,7 @@ L6470_init_t L6470_init[L6470DAISYCHAINSIZE] = {
         150.0,                         /* Motor initial speed [step/s]. */
         600.0,                         /* Motor acceleration [step/s^2] (comment for infinite acceleration mode). */
         600.0,                         /* Motor deceleration [step/s^2] (comment for infinite deceleration mode). */
-        300.0,                         /* Motor maximum speed [step/s]. */
+        1000.0,                         /* Motor maximum speed [step/s]. */
         0.0,                           /* Motor minimum speed [step/s]. */
         602.7,                         /* Motor full-step speed threshold [step/s]. */
         3.06,                          /* Holding kval [V]. */
@@ -122,9 +122,9 @@ void avancer(unsigned int pas, int d){
     // x_nucleo_ihm02a1->perform_prepared_actions();
 }
 
-void avancerVit(){
-    motors[1]->prepare_run(StepperMotor::BWD, SPEED);
-    motors[0]->prepare_run(StepperMotor::BWD, SPEED);
+void avancerVit(int speed){
+    motors[1]->prepare_run(StepperMotor::BWD, speed);
+    motors[0]->prepare_run(StepperMotor::BWD, speed);
 
     x_nucleo_ihm02a1->perform_prepared_actions();
 }

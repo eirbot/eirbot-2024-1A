@@ -16,9 +16,10 @@ enum variableName{
 #define off 0
 #define on 1
 
-#define stratReact 1
-#define strat6P 2
-#define strat3P 3
+#define stratCarre 1
+#define aller_retour 2
+#define drag 3
+// #define stratTest 4
 
 void changeVar(enum variableName variableName, int value);
 int checkVar(enum variableName variableName);

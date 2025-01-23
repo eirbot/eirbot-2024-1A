@@ -4,7 +4,7 @@
 char forwardVal = 1;
 char manualVal = 0;
 char instructVal = 0;
-char teamVal = yellow;
+char teamVal = blue;
 char matchVal = 1;
 char captVal = on;
 

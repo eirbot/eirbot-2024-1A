@@ -7,17 +7,19 @@
 #define delayI 0.4
 
 void allerRetour(float distance){
-    // enqueueInstruction({'p', 0});
+    enqueueInstruction({'p', 0});
     // enqueueInstruction({'w', delayI});
     // enqueueInstruction({'l', 4.0*3.14/180});
     enqueueInstruction({'w', delayI});
     enqueueInstruction({'f', distance});
-    // enqueueInstruction({'w', delayI});
-    // enqueueInstruction({'r', 4.0*3.14/180});
-    // enqueueInstruction({'w', 0.5});
-    // enqueueInstruction({'p', 90});
+    enqueueInstruction({'w', 0.5});
+    enqueueInstruction({'p', 90});
     enqueueInstruction({'w', delayI});
-    enqueueInstruction({'b', distance});
+    enqueueInstruction({'r', 3.14});
+    enqueueInstruction({'w', delayI});
+    enqueueInstruction({'f', distance});
+    enqueueInstruction({'w', delayI});
+    enqueueInstruction({'r', 3.14});
 }
 
 void allerRetourVitesse(float distance){
@@ -31,22 +33,22 @@ void allerRetourVitesse(float distance){
 
 void carre(){
     // enqueueInstruction({'w', 0.5});
-    enqueueInstruction({'f', 50});
+    enqueueInstruction({'f', 35});
     // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 
     // enqueueInstruction({'w', 0.5});
-    enqueueInstruction({'f', 50});
+    enqueueInstruction({'f', 35});
     // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 
     // enqueueInstruction({'w', 0.5});
-    enqueueInstruction({'f', 50});
+    enqueueInstruction({'f', 35});
     // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
     
     // enqueueInstruction({'w', 0.5});
-    enqueueInstruction({'f', 50});
+    enqueueInstruction({'f', 35});
     // enqueueInstruction({'w', 0.5});
     enqueueInstruction({'r', 3.14/2});
 }
@@ -120,6 +122,22 @@ void stratBlueReact(){
     enqueueInstruction({'e', 0});
 }
 
+void stratBlueTest(){
+    // enqueueInstruction({'w', 10});
+    enqueueInstruction({'7', 170});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'h', 170});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'f', 125});
+    enqueueInstruction({'l', 2.15});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
 void stratYellow6P(){
     enqueueInstruction({'w', 10});
     enqueueInstruction({'b', 185});
@@ -167,6 +185,22 @@ void stratYellowReact(){
     enqueueInstruction({'e', 0});
 }
 
+void stratYellowTest(){
+    // enqueueInstruction({'w', 10});
+    enqueueInstruction({'8', 185});
+    enqueueInstruction({'p', 7});
+    enqueueInstruction({'s', 90});
+    enqueueInstruction({'g', 185});
+    enqueueInstruction({'p', 105});
+    enqueueInstruction({'s', 300});
+    enqueueInstruction({'b', 125});
+    enqueueInstruction({'l', 3.14 - 2.2});
+    enqueueInstruction({'f', 190});
+    // enqueueInstruction({'r', 95*3.14/180});
+    // enqueueInstruction({'f', 120});
+    enqueueInstruction({'e', 0});
+}
+
 void bonjour(){
     enqueueInstruction({'p', 7});
     enqueueInstruction({'p', 105});
@@ -188,6 +222,10 @@ void panneaux_solaires_bleus(){
     enqueueInstruction({'p', 105});
     enqueueInstruction({'e', 0});
 } 
+
+void stratDragF(){
+    enqueueInstruction({'v', 600});
+}
 
 #define SOLAR_PANEL_AXIS 1752
 
@@ -280,31 +318,49 @@ void inspectEnvironmentAndComputeNewStrategy()
     // }
 
     switch(checkVar(match)){
-        case stratReact:
-            if(checkVar(team) == blue){
-                stratBlueReact();
-            }
-            else{
-                stratYellowReact();
-            }
-            break;
+        // case stratReact:
+        //     if(checkVar(team) == blue){
+        //         stratBlueReact();
+        //     }
+        //     else{
+        //         stratYellowReact();
+        //     }
+        //     break;
 
-            case strat6P:
-            if(checkVar(team) == blue){
-                stratBlue6P();
-            }
-            else{
-                stratYellow6P();
-            }
-            break;
+        //     case strat6P:
+        //     if(checkVar(team) == blue){
+        //         stratBlue6P();
+        //     }
+        //     else{
+        //         stratYellow6P();
+        //     }
+        //     break;
 
-            case strat3P:
-            if(checkVar(team) == blue){
-                stratBlue3P();
-            }
-            else{
-                stratYellow3P();
-            }
+        //     case strat3P:
+        //     if(checkVar(team) == blue){
+        //         stratBlue3P();
+        //     }
+        //     else{
+        //         stratYellow3P();
+        //     }
+        //     break;
+
+        //     case stratTest:
+        //     if(checkVar(team) == blue){
+        //         stratBlueTest();
+        //     }
+        //     else{
+        //         stratYellowTest();
+        //     }
+
+            case drag:
+            stratDragF();
+            break;
+            case stratCarre:
+            carre();
+            break;
+            case aller_retour:
+            allerRetour(50);
             break;
 
         default:

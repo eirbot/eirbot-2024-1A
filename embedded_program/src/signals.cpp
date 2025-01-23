@@ -9,7 +9,6 @@
 #include "stepper_interface.h"
 #include "signals.h"
 
-
 char gotEmergencyStopSignal()
 {
     // if (digitalRead(EMERGENCY_PIN))
@@ -17,10 +16,21 @@ char gotEmergencyStopSignal()
     return 0;
 }
 
+float buffer[BUFFER_SIZE];
+// float bufferL[BUFFER_SIZE] = {};
+// float bufferR[BUFFER_SIZE] = {};
+// float bufferM[BUFFER_SIZE] = {};
+
 void processExternalSignals()
 {
     if(checkVar(instruct) != 'w' && checkVar(instruct) != 'p' && checkVar(capt) != off){
         float distance;
+        for(int i=BUFFER_SIZE-1; i>2; i--){
+            buffer[i] = buffer[i-3];
+            // bufferL[i] = bufferL[i-1];
+            // bufferR[i] = bufferR[i-1];
+            // bufferM[i] = bufferM[i-1];
+        }
         for(int i=1; i<4; i++){
             if (checkVar(forward)){
                 distance = readUltrasonic('f', i);
@@ -28,14 +38,16 @@ void processExternalSignals()
             else{
                 distance = readUltrasonic('b', i);
             } 
-            // int posL = motorPos(left);
-            // int posR = motorPos(right);
 
-            // int par = motorPar(left);
+            buffer[i-1] = distance;
 
-            // printingFloat(distance);
+            float moy = 0;
+            for(int k=0; k<BUFFER_SIZE/3; k++){
+                moy += buffer[i-1 + k*3];
+            }
 
-            if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+            // if (distance < 17 && distance > 0.1 /*&& (checkVar(instruct) == 'f' || checkVar(instruct) == 'b')*/){
+            if (moy > 1.0 && moy < 30){
 
                 unsigned int remainingSteps = abortRunningTask();
 

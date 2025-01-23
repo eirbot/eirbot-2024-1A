@@ -8,7 +8,7 @@ enum motor{
 
 void board_setup();
 void avancer(unsigned int pas, int d);
-void avancerVit();
+void avancerVit(int speed);
 void reculer(unsigned int pas, int d);
 void reculerVit();
 void tournerDroite(int pasG, int pasD);

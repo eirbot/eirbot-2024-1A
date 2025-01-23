@@ -14,4 +14,6 @@ char switchInstuct(char instructVal);
 
 int interface();
 
+#define BUFFER_SIZE 6
+
 #endif
